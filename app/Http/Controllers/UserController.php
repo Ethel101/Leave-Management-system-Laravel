@@ -88,6 +88,7 @@ if( $this->checkUserLogin()){
                 return Redirect::back()->withErrors($err);
 
             }
+
         }
 
     }

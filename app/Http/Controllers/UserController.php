@@ -113,5 +113,14 @@ if( $this->checkUserLogin()){
     }
 
 
+    function getLeaveReq(){
+        if($this->checkUserLogin()){
+            return view('user.leaverequest');
+        }else{
+            return Redirect('user_login');
+        }
+    }
+
+
 
 }

@@ -71,7 +71,15 @@
                                                                                                 <span class="help-block">Designation of employee</span>
                                                                                             </div>
                                                                                         </div>
-
+<div class="form-group">
+                                        <label class="col-md-3 control-label">Start with year</label>
+                                        <div class="col-md-5">
+                                            <div class="input-group">
+                                                <input type="text" id="dp-3" class="form-control" value="06-06-2014" data-date="06-06-2014" data-date-format="dd-mm-yyyy" data-date-viewmode="years"/>
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                              <div class="form-group">
                                                 <label class="col-md-3 control-label">Duty</label>

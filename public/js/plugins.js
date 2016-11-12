@@ -136,12 +136,7 @@ $(function() {
         // END iCheckbox
         
         //Bootstrap file input
-        var feBsFileInput = function(){
-            
-            if($("input.fileinput").length > 0)
-                $("input.fileinput").bootstrapFileInput();
-            
-        }
+
         //END Bootstrap file input
         
         return {// Init all form element features
@@ -156,7 +151,7 @@ $(function() {
                     fePopover();
                     feTagsinput();
                     feiCheckbox();
-                    feBsFileInput();
+                 //   feBsFileInput();
                     feDaterangepicker();
                 }
         }

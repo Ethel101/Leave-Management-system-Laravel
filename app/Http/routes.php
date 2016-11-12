@@ -50,6 +50,7 @@ Route::get('/user_logout','UserController@userLogout');
 
 
 Route::get('/user_dash','UserController@getDashUser');
+Route::get('/request_leave','UserController@getLeaveReq');
 
 
 

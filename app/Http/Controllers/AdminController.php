@@ -304,7 +304,7 @@ class AdminController extends Controller
 
     function getLeaveRequest(){
         if($this->checkAdmin()){
-            return view('admin.leaverequest');
+            return view('admin.listleaverequest');
         }else{
             return Redirect('admin_login');
         }

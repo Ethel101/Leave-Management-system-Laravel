@@ -42,14 +42,14 @@
                                             @foreach($leavereqDb as $leaveObj)
                                             <?php
                                             $stat = $leaveObj->status;
-                                             $statusString  = 'Status';
+                                            /* $statusString  = 'Status';
                                              if($leaveObj->status == 0 ){
                                             $statusString = 'Pending';
-                                            }else if($leaveObj == 1){
+                                            }else if($leaveObj->status == 1){
                                             $statusString = 'Aproved';
                                             }else if($leaveObj == 2){
                                             $statusString = 'Rejected';
-                                            }
+                                            }*/
                                              ?>
                                                 <tr id="trow_1">
                                                     <td class="text-center">1</td>

@@ -320,9 +320,9 @@ class AdminController extends Controller
                 $act = Input::get('act');
                     if($act!=null){
                 if($act == 1){
-                    DB::table('leaveapply')->where('id',$id)->first()->update(['status'=>1]);
+                    DB::table('leaveapply')->where('id',$id)->update(['status'=>1]);
                 }elseif($act == 2){
-                    DB::table('leaveapply')->where('id',$id)->first()->update(['status'=>2]);
+                    DB::table('leaveapply')->where('id',$id)->update(['status'=>2]);
                 }
                     }
             }

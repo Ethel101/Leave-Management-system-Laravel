@@ -41,11 +41,15 @@
                     </li>
                     <li class="xn-title">Navigation</li>
                     <li class="active">
-                        <a href="{{url('/admin_dashboard')}}"><span class="fa fa-desktop"></span> <span class="xn-text">Home</span></a>
+                        <a href="{{url('/admin_dashboard')}}"><span class="fa fa-desktop"></span> <span class="xn-text">Employees</span></a>
                     </li>
+                    <li class="active">
+                    <a href="{{url('/admin_leaves')}}"><span class="fa fa-desktop"></span> <span class="xn-text">Leave Requests</span></a>
+                      </li>
                      <li class="active">
-                                            <a href="{{url('/add_emp')}}"><span class="fa fa-desktop"></span> <span class="xn-text">Add New Employees</span></a>
-                                        </li>
+                       <a href="{{url('/add_emp')}}"><span class="fa fa-desktop"></span> <span class="xn-text">Add New Employees</span></a>
+                       </li>
+
 
                 </ul>
                 <!-- END X-NAVIGATION -->
@@ -111,7 +115,7 @@
                     </div>
                     <div class="mb-footer">
                         <div class="pull-right">
-                            <a href="{{url('logout')}}" class="btn btn-success btn-lg">Yes</a>
+                            <a href="{{url('admin_logout')}}" class="btn btn-success btn-lg">Yes</a>
                             <button class="btn btn-default btn-lg mb-control-close">No</button>
                         </div>
                     </div>

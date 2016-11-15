@@ -129,6 +129,7 @@ class AdminController extends Controller
 
     function userLogout(){
         Auth::logout();
+        return Redirect('admin_login');
     }
 
     function addEmployee(){

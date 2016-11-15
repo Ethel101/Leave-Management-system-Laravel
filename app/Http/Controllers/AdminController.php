@@ -311,5 +311,27 @@ class AdminController extends Controller
     }
 
 
+    function  getLeaveAction(){
+        if($this->checkAdmin()){
+            $var = Input::get('var');
+            if($var == 2){
+                $id = Input::get('id');
+                if($id!=null){
+                $act = Input::get('act');
+                    if($act!=null){
+                if($act == 1){
+                    DB::table('leaveapply')->where('id',$id)->first()->update(['status'=>1]);
+                }elseif($act == 2){
+                    DB::table('leaveapply')->where('id',$id)->first()->update(['status'=>2]);
+                }
+                    }
+            }
+            }
+            return Redirect('admin_leaves');
+        }else{
+            return Redirect('admin_login');
+        }
+    }
+
 
 }

@@ -68,9 +68,9 @@
                                                       <td><span class="label label-danger">Rejected</span></td>
                                                       @endif
                                                     <td>@if($stat != 1)
-                                                        <a href="{{url('/leave_approve?id=')}}" type="button" class="btn btn-success">Approve</a>
+                                                        <a href="{{url('/leave?id='.$leaveObj->id.'&act=1&var=2')}}" type="button" class="btn btn-success">Approve</a>
                                                         @endif
-                                                        <a href="{{url('/emp_detail?id=')}}" type="button" class="btn btn-danger">Reject</a>
+                                                        <a href="{{url('/leave?id='.$leaveObj->id.'&act=2&var=2')}}" type="button" class="btn btn-danger">Reject</a>
                                                     </td>
                                                 </tr>
                                                 @endforeach

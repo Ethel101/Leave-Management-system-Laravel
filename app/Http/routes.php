@@ -36,6 +36,8 @@ Route::get('/update_emp', 'AdminController@getUpdateEmp');
 Route::post('/update_emp', 'AdminController@postUpdateEmp');
 
 Route::get('/admin_leaves', 'AdminController@getLeaveRequest');
+Route::get('/leave', 'AdminController@getLeaveAction');
+
 
 
 

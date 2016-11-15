@@ -22,7 +22,7 @@ class AdminController extends Controller
     }
 
     function test(){
-        echo 'test';
+       return view('admin.test');
     }
 
     function populateUser(){
@@ -301,6 +301,14 @@ class AdminController extends Controller
         }
     }
 
+
+    function getLeaveRequest(){
+        if($this->checkAdmin()){
+            return view('admin.leaverequest');
+        }else{
+            return Redirect('admin_login');
+        }
+    }
 
 
 

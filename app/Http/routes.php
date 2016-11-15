@@ -15,6 +15,9 @@ Route::get('/', 'WelcomeController@index');
 
 Route::get('home', 'HomeController@index');
 
+
+
+//Admin Routes
 Route::get('/admin_login', 'AdminController@adminLoginGet');
 Route::post('/admin_login', 'AdminController@adminLoginPost');
 Route::get('/',  function (){
@@ -31,6 +34,8 @@ Route::get('/emp_detail', 'AdminController@getProfileView');
 
 Route::get('/update_emp', 'AdminController@getUpdateEmp');
 Route::post('/update_emp', 'AdminController@postUpdateEmp');
+
+Route::get('/admin_leaves', 'AdminController@getLeaveRequest');
 
 
 
@@ -52,6 +57,10 @@ Route::get('/user_logout','UserController@userLogout');
 Route::get('/user_dash','UserController@getDashUser');
 Route::get('/request_leave','UserController@getLeaveReq');
 
+
+Route::post('/request_leave','UserController@postLeaveReq');
+
+Route::get('/test','AdminController@test');
 
 
 

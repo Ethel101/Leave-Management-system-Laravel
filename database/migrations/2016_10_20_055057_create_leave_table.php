@@ -20,8 +20,8 @@ class CreateLeaveTable extends Migration {
             $table->string('name')->nullable();
             $table->string('username')->unique();
             $table->string('totalleave')->nullable();
-            $table->string('dates')->nullable();
-
+            $table->string('startdate')->nullable();
+            $table->string('enddate  ')->nullable();
 
             $table->rememberToken();
             $table->timestamps();

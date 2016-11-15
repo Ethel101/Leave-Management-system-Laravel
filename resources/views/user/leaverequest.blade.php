@@ -60,12 +60,12 @@
 <div class="form-group">
                                         <label class="col-md-3 control-label">Leave Type</label>
                                         <div class="col-md-9">
-                                            <select class="form-control select">
-                                                <option>Option 1</option>
-                                                <option>Option 2</option>
-                                                <option>Option 3</option>
-                                                <option>Option 4</option>
-                                                <option>Option 5</option>
+                                            <select name="leave_type" class="form-control select">
+                                                <option value="1">Option 1</option>
+                                                <option value="2" >Option 2</option>
+                                                <option value="3"  >Option 3</option>
+                                                <option value="4" >Option 4</option>
+                                                <option value="5" >Option 5</option>
                                             </select>
                                               <span class="help-block">Select Leave Type  </span>
 
@@ -79,9 +79,9 @@
                                                                                             <div class="col-md-9">
                                                                                                 <div class="input-group">
                                                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                                                                                     <input type="text" class="form-control datepicker" data-date-format="dd-mm-yyyy" value="" data-date-viewmode="years">
+                                                                                                     <input name="start_date" type="text" class="form-control datepicker" data-date-format="dd-mm-yyyy" value="" data-date-viewmode="years">
                                                                                                 </div>
-                                                                                                 <label class="check"><input type="checkbox" class="icheckbox"/> Second Half</label>
+                                                                                                 <label class="check"><input name="start_half" type="checkbox" class="icheckbox" value="1"/> Second Half</label>
                                                                                                <!-- <span class="help-block">Leave starting date </span> -->
                                                                                             </div>
                                                                                         </div>
@@ -107,7 +107,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label">Leave Reason</label>
                                                 <div class="col-md-9 col-xs-12">
-                                                    <textarea class="form-control" name="note" rows="5"></textarea>
+                                                    <textarea class="form-control" name="reason" rows="5"></textarea>
                                                     <span class="help-block">Reason and additional notes on Leave</span>
                                                 </div>
                                             </div>
@@ -127,7 +127,7 @@
                                                                                 <div class="col-md-9">
                                                                                     <div class="input-group">
                                                                                         <span class="input-group-addon"><span class="fa fa-mobile-phone"></span></span>
-                                                                                        <input type="text" class="form-control" name="email" placeholder="Mobile number "/>
+                                                                                        <input type="text" class="form-control" name="mobno" placeholder="Mobile number "/>
                                                                                     </div>
                                                                                     <span class="help-block">Employee contact number</span>
                                                                                 </div>
@@ -141,9 +141,9 @@
                                                                                                                                     <div class="col-md-9">
                                                                                                                                         <div class="input-group">
                                                                                                                                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                                                                                                                             <input type="text" class="form-control datepicker" data-date-format="dd-mm-yyyy" value="" data-date-viewmode="years">
+                                                                                                                                             <input name="end_date" type="text" class="form-control datepicker" data-date-format="dd-mm-yyyy" value="" data-date-viewmode="years">
                                                                                                                                         </div>
-                                                                                                                                         <label class="check"><input type="checkbox" class="icheckbox"/> First Half</label>
+                                                                                                                                         <label class="check"><input name="end_half" type="checkbox" class="icheckbox"  value="1"/> First Half</label>
                                                                                                                                        <!-- <span class="help-block">Leave starting date </span> -->
                                                                                                                                     </div>
                                                                                                                                 </div>

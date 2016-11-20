@@ -34,6 +34,8 @@
                                                     <th width="100">Start Date</th>
                                                     <th width="100">End Date</th>
                                                     <th width="100">Total Days</th>
+                                                    <th width="100">Created at</th>
+
                                                      <th width="100">Status</th>
                                                       <th width="100">Action</th>
                                                 </tr>
@@ -60,6 +62,7 @@
                                                       <td>{{$leaveObj->start_date}}</td>
                                                       <td>{{$leaveObj->end_date}}</td>
                                                       <td>{{$leaveObj->totalleave}}</td>
+                                                       <td>{{$leaveObj->ontime}}<br>{{$leaveObj->ondate}}</td>
                                                       @if($stat== 0)
                                                     <td><span class="label label-warning">Pending</span></td>
                                                     @elseif($stat == 1)

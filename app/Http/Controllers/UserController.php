@@ -188,6 +188,11 @@ if( $this->checkUserLogin()){
                 }if($endHalf==1){
                     $days = $days-0.5;
                 }
+                $currentDate = date("d/m/Y");
+                date_default_timezone_set("Asia/Kolkata");
+
+                $currentTime =  date("h:i:sa");
+               // dd($currentDate);
               //  dd($difference->days);
 
                 $leaveModel = new Leaveapply();
@@ -204,6 +209,8 @@ if( $this->checkUserLogin()){
                 $leaveModel->leave_type = Input::get('leave_type');;
                 $leaveModel->status = 0;
                 $leaveModel->totalleave = $days;
+                $leaveModel->ondate = $currentDate;
+                $leaveModel->ontime = $currentTime;
 
 
                 $leaveModel->save();

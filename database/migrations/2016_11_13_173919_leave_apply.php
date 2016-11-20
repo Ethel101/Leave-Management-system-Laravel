@@ -19,7 +19,6 @@ class LeaveApply extends Migration {
             $table->string('empid');
             $table->string('name')->nullable();
             $table->string('username');
-
             $table->string('leave_type');
             $table->string('start_date');
             $table->string('end_date');
@@ -29,10 +28,10 @@ class LeaveApply extends Migration {
             $table->string('reason');
             $table->string('totalleave')->nullable();
             $table->string('status');
+            $table->string('ondate')->nullable();
+            $table->string('ontime')->nullable();
 
             //$table->string('dates')->nullable();
-
-
             $table->rememberToken();
             $table->timestamps();
         });

@@ -19,7 +19,7 @@ $iid = \Illuminate\Support\Facades\Auth::user()->id;
                             <div class="panel panel-default">
 
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Employees Leave Request</h3>
+                                    <h3 class="panel-title">Your Leave Request</h3>
                                 </div>
 
                                 <div class="panel-body panel-body-table">
@@ -37,7 +37,6 @@ $iid = \Illuminate\Support\Facades\Auth::user()->id;
                                                     <th width="100">End Date</th>
                                                     <th width="100">Total Days</th>
                                                     <th width="100">Status</th>
-                                                    <th width="100">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -69,11 +68,7 @@ $iid = \Illuminate\Support\Facades\Auth::user()->id;
                                                      @elseif($stat == 2)
                                                       <td><span class="label label-danger">Rejected</span></td>
                                                       @endif
-                                                    <td>@if($stat != 1)
-                                                        <a href="{{url('/leave?id='.$leaveObj->id.'&act=1&var=2')}}" type="button" class="btn btn-success">Approve</a>
-                                                        @endif
-                                                        <a href="{{url('/leave?id='.$leaveObj->id.'&act=2&var=2')}}" type="button" class="btn btn-danger">Reject</a>
-                                                    </td>
+
                                                 </tr>
                                                 @endforeach
 

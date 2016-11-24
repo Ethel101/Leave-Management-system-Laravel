@@ -17,11 +17,17 @@ class CreateLeaveTable extends Migration {
         {
             $table->increments('id');
             $table->string('empid')->unique();
-            $table->string('name')->nullable();
-            $table->string('username')->unique();
+           // $table->string('name')->nullable();
+            $table->string('username');
             $table->string('totalleave')->nullable();
             $table->string('startdate')->nullable();
             $table->string('enddate  ')->nullable();
+            $table->string('start_half');
+            $table->string('end_half');
+            $table->string('ondate')->nullable();
+            $table->string('ontime')->nullable();
+            $table->string('leave_type');
+
 
             $table->rememberToken();
             $table->timestamps();

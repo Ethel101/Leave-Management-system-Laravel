@@ -55,9 +55,13 @@ $totalLeav = $leavDb->totalleave;
 
                         </div>
 
-                        <div class="col-md-9">
+                        <div class="col-md-5">
 
                             <!-- START TIMELINE -->
+
+                                            <button class="btn btn-info btn-rounded btn-block"><span class="fa fa-edit"></span> Edit</button>
+
+
 
                             <!-- END TIMELINE -->
 

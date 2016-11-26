@@ -31,6 +31,9 @@ Route::get('/add_emp', 'AdminController@addEmployee');
 Route::post('/add_emp', 'AdminController@addEmployeePost');
 Route::get('/emp_del', 'AdminController@deleteEmployees');
 Route::get('/emp_detail', 'AdminController@getProfileView');
+Route::post('/emp_detail', 'AdminController@getEmpInfoLeaveDeatils');
+
+
 
 Route::get('/update_emp', 'AdminController@getUpdateEmp');
 Route::post('/update_emp', 'AdminController@postUpdateEmp');

@@ -188,8 +188,9 @@ if( $this->checkUserLogin()){
                 }if($endHalf==1){
                     $days = $days-0.5;
                 }
-                $currentDate = date("d/m/Y");
                 date_default_timezone_set("Asia/Kolkata");
+
+                $currentDate = date("d/m/Y");
 
                 $currentTime =  date("h:i:sa");
                // dd($currentDate);
@@ -214,7 +215,7 @@ if( $this->checkUserLogin()){
 
 
                 $leaveModel->save();
-                return view('user.leaverequest')->with('success','Employee Successfully saved');
+                return view('user.leaverequest')->with('success','Your application succesfully submitted !');
 
             }
 

@@ -2,6 +2,7 @@
 
 
 
+use App\Leave;
 use App\User;
 
 use Illuminate\Http\Request;
@@ -321,8 +322,26 @@ class AdminController extends Controller
                 $act = Input::get('act');
                     if($act!=null){
                 if($act == 1){
+                    date_default_timezone_set("Asia/Kolkata");
+                    $currentDate = date("d/m/Y");
+                    $currentTime =  date("h:i:sa");
+                    $leaveItem =  DB::table('leaveapply')->where('id',$id)->first();
+                    $leave = new Leave();
+                    $leave->empid = $leaveItem->empid;
+                    $leave->application_id = $leaveItem->id;
+                    $leave->username = $leaveItem->username;
+                    $leave->totalleave = $leaveItem->totalleave;
+                    $leave->startdate = $leaveItem->start_date;
+                    $leave->enddate = $leaveItem->end_date;
+                    $leave->start_half = $leaveItem->start_half;
+                    $leave->end_half = $leaveItem->end_half;
+                    $leave->ondate = $currentDate;
+                    $leave->ontime = $currentTime;
+                    $leave->leave_type = $leaveItem->leave_type;
+                    $leave->save();
                     DB::table('leaveapply')->where('id',$id)->update(['status'=>1]);
                 }elseif($act == 2){
+                     DB::table('leave')->where('application_id',$id)->delete();
                     DB::table('leaveapply')->where('id',$id)->update(['status'=>2]);
                 }
                     }
@@ -333,6 +352,60 @@ class AdminController extends Controller
             return Redirect('admin_login');
         }
     }
+
+
+
+
+    function getEmpInfoLeaveDeatils(){
+        if($this->checkAdmin()){
+            $upperDate = Input::get('upper_date');
+            $lowerDate = Input::get('lower_date');
+            $userId = Input::get('u_id');
+            if($upperDate!=null&&$lowerDate!=null){
+
+                $totalDays = 0;
+                $actualLeaveDates = Array();
+                $userLeavDb = DB::table('leave')->where('empid',$userId)->get();
+                date_default_timezone_set("Asia/Kolkata");
+                $upperDate = new DateTime('1-11-2016');
+                $lowerDate = new DateTime('30-12-2016');
+                $lowerDate->modify('+1 day');
+                $period = new DatePeriod($upperDate,new DateInterval('P1D'),$lowerDate);
+
+                foreach($userLeavDb as $userLeav){
+                    $startD = new DateTime($userLeav->startdate);
+                    $endD = new DateTime($userLeav->enddate);
+                    $endD->modify('+1 day');
+                    $periodLeaveDate = new DatePeriod( $startD,new DateInterval('P1D'),$endD);
+
+                    foreach($period as $date){
+                        //echo $date->format("d-m-Y") . "";
+                        foreach($periodLeaveDate as $datel){
+                            // echo $datel->format("d-m-Y") . "  ";
+                            if($date->format("d-m-Y")==$datel->format("d-m-Y")){
+                                $actualLeaveDates[] =$date->format("Y-m-d")."";
+                                // echo "equal ".$date->format("d-m-Y");
+                                $totalDays++;
+                            }
+                        }
+                    }
+                }
+                echo $totalDays."  = days";
+
+
+
+
+            }
+
+
+
+
+        }else{
+            return Redirect('admin_login');
+        }
+
+        }
+
 
 
 }

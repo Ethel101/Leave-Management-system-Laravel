@@ -124,10 +124,6 @@
         </div>
         <!-- END MESSAGE BOX-->
 
-        <!-- START PRELOADS -->
-        <audio id="audio-alert" src="audio/alert.mp3" preload="auto"></audio>
-        <audio id="audio-fail" src="audio/fail.mp3" preload="auto"></audio>
-        <!-- END PRELOADS -->
 
     <!-- START SCRIPTS -->
         <!-- START PLUGINS -->
@@ -160,6 +156,18 @@
                 <script type="text/javascript" src="js/plugins/datatables/jquery.dataTables.min.js"></script>
         <!-- END THIS PAGE PLUGINS-->
 
+
+<!-- START THIS PAGE PLUGINS  CALENDER-->
+        <script type='text/javascript' src='js/plugins/icheck/icheck.min.js'></script>
+        <script type="text/javascript" src="js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+
+        <script type="text/javascript" src="js/plugins/moment.min.js"></script>
+        <script type="text/javascript" src="js/plugins/fullcalendar/fullcalendar.min.js"></script>
+        <!-- END THIS PAGE PLUGINS-->
+
+
+
+
         <!-- START TEMPLATE -->
 
         <script type="text/javascript" src="js/plugins.js"></script>
@@ -168,6 +176,8 @@
         <script type="text/javascript" src="js/demo_dashboard.js"></script>
         <!-- END TEMPLATE -->
     <!-- END SCRIPTS -->
+
+
     </body>
 </html>
 

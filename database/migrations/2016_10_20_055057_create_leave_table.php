@@ -19,9 +19,10 @@ class CreateLeaveTable extends Migration {
             $table->string('empid')->unique();
            // $table->string('name')->nullable();
             $table->string('username');
+            $table->string('application_id');
             $table->string('totalleave')->nullable();
-            $table->string('startdate')->nullable();
-            $table->string('enddate  ')->nullable();
+            $table->string('startdate');
+            $table->string('enddate');
             $table->string('start_half');
             $table->string('end_half');
             $table->string('ondate')->nullable();

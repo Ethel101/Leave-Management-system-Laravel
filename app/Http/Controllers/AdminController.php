@@ -279,11 +279,16 @@ class AdminController extends Controller
                     $admin = 0;
                 }
                 $filename = "";
-                if(Input::hasFile('eproimg')){
+                if(Input::hasFile('eproimg')) {
                     $imageFile = Input::file('proimg');
+                    if ($imageFile != null) {
                     $filename = time() . '-profile_photo' . '.' . $imageFile->getClientOriginalExtension();
                     $imageFile->move('profileimg', $filename);
                     $ext = $imageFile->getClientOriginalExtension();
+                }else{
+                       $userTbl = DB::table('users')->where('id',$eid)->first();
+                        $filename = $userTbl->image;
+                    }
 
                 }
 

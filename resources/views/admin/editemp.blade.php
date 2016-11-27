@@ -96,7 +96,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label">Note</label>
                                                 <div class="col-md-9 col-xs-12">
-                                                    <textarea class="form-control" name="enote" rows="5" value="{{$emp->note}}" ></textarea>
+                                                    <textarea class="form-control" name="enote" rows="5"  >{{$emp->note}}</textarea>
                                                     <span class="help-block">Note about employee</span>
                                                 </div>
                                             </div>

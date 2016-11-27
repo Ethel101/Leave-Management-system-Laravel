@@ -40,7 +40,8 @@ $totalLeav = $leavDb->totalleave;
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <button class="btn btn-info btn-rounded btn-block"><span class="fa fa-edit"></span> Edit</button>
+                                          <a href="{{url('/update_emp?eid='.$userId)}}" >  <button  class="btn btn-info btn-rounded btn-block"><span class="fa fa-edit"></span> Edit</button> </a>
+
                                         </div>
                                         <div class="col-md-6">
                                             <button class="btn btn-primary btn-rounded btn-block"><span class="fa fa-window-close"></span> Delete</button>
@@ -60,8 +61,10 @@ $totalLeav = $leavDb->totalleave;
 
                         </div>
 
-                        <div style="margin-top: 50px" class="col-md-5">
-
+                        <div style="margin-top: 20px" class="col-md-5">
+ <div style="margin-bottom: 30px" class="panel-heading">
+                                    <h3 class="panel-title">Employees Leave Dates</h3>
+                                </div>
                             <!-- START TIMELINE -->
                             <form class="form-horizontal" method="post" action="{{url('/emp_detail?id='.$userId)}}" enctype="multipart/form-data">
 

@@ -358,25 +358,26 @@ class AdminController extends Controller
 
     function getEmpInfoLeaveDeatils(){
         if($this->checkAdmin()){
-            $upperDate = Input::get('upper_date');
-            $lowerDate = Input::get('lower_date');
-            $userId = Input::get('u_id');
-            if($upperDate!=null&&$lowerDate!=null){
+            $upperDates = Input::get('upper_date');
+            $lowerDates = Input::get('lower_date');
+            $userId = Input::get('id');
+            if($upperDates!=null&&$lowerDates!=null&&$userId!=null){
 
                 $totalDays = 0;
                 $actualLeaveDates = Array();
                 $userLeavDb = DB::table('leave')->where('empid',$userId)->get();
                 date_default_timezone_set("Asia/Kolkata");
-                $upperDate = new DateTime('1-11-2016');
-                $lowerDate = new DateTime('30-12-2016');
+
+                $upperDate = new \DateTime($upperDates);
+                $lowerDate = new \DateTime($lowerDates);
                 $lowerDate->modify('+1 day');
-                $period = new DatePeriod($upperDate,new DateInterval('P1D'),$lowerDate);
+                $period = new \DatePeriod($upperDate,new \DateInterval('P1D'),$lowerDate);
 
                 foreach($userLeavDb as $userLeav){
-                    $startD = new DateTime($userLeav->startdate);
-                    $endD = new DateTime($userLeav->enddate);
+                    $startD = new \DateTime($userLeav->startdate);
+                    $endD = new \DateTime($userLeav->enddate);
                     $endD->modify('+1 day');
-                    $periodLeaveDate = new DatePeriod( $startD,new DateInterval('P1D'),$endD);
+                    $periodLeaveDate = new \DatePeriod( $startD,new \DateInterval('P1D'),$endD);
 
                     foreach($period as $date){
                         //echo $date->format("d-m-Y") . "";
@@ -390,9 +391,10 @@ class AdminController extends Controller
                         }
                     }
                 }
-                echo $totalDays."  = days";
+            //    echo $totalDays."  = days";
+            //    dd($actualLeaveDates);
 
-
+            return view('admin.empdetails')->with('total_days',$totalDays)->with('leaveDates',$actualLeaveDates)->with('uId',$userId);
 
 
             }

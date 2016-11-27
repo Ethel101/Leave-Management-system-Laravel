@@ -4,6 +4,10 @@
 
 <?php
 
+
+
+
+
 if(isset($uId)){
 $userObj = DB::table('users')->where('id',$uId)->first();
 $leavDb =  DB::table('leave')->where('empid',$userObj->id)->first();
@@ -96,7 +100,7 @@ $totalLeav = $leavDb->totalleave;
                                                                                                                                 </form>
 
                         <?php
-                        $totalDays = 0;
+                     /*   $totalDays = 0;
                         $actualLeaveDates = Array();
                         $userLeavDb = DB::table('leave')->where('empid',$userId)->get();
                         date_default_timezone_set("Asia/Kolkata");
@@ -126,9 +130,12 @@ $totalLeav = $leavDb->totalleave;
                             echo $totalDays."  = days"
 
 
-
+*/
                         ?>
  <!-- START CONTENT FRAME BODY -->
+
+ @if(isset($uId)&&isset($total_days)&&isset($leaveDates))
+
                     <div  style="margin-top: 50px" class="content-frame-body padding-bottom-0">
 
                         <div class="row">
@@ -142,7 +149,7 @@ $totalLeav = $leavDb->totalleave;
                     </div>
                     <!-- END CONTENT FRAME BODY -->
 
-
+@endif
 
                             <!-- END TIMELINE -->
 
@@ -163,8 +170,10 @@ $totalLeav = $leavDb->totalleave;
                                 <script type="text/javascript" src="js/plugins/fullcalendar/fullcalendar.min.js"></script>
                                 <!-- END THIS PAGE PLUGINS-->
                         <!-- END PLUGINS -->
+ @if(isset($uId)&&isset($total_days)&&isset($leaveDates))
+
   <script>
-  var dates = <?php echo json_encode($actualLeaveDates); ?>;
+  var dates = <?php echo json_encode($leaveDates); ?>;
 
 console.log(dates);
  var events = [];
@@ -197,5 +206,5 @@ dayRender: function(date, cell){
     }*/
 
 </script>
-
+@endif
 @endsection

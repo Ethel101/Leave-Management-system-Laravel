@@ -16,7 +16,7 @@ class CreateLeaveTable extends Migration {
         Schema::create('leave', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->string('empid')->unique();
+            $table->string('empid');
            // $table->string('name')->nullable();
             $table->string('username');
             $table->string('application_id');

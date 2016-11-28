@@ -259,7 +259,7 @@ class AdminController extends Controller
                 [
 
                     'email' => 'required|email|unique:users,email,'.$eid,
-                    'password' => 'required|min:3',
+                    'password' => 'min:3',
                     'username' => 'required|unique:users,username,'.$eid
                 ]
             );
@@ -273,30 +273,43 @@ class AdminController extends Controller
                 return view('admin.addemp')->withErrors($validator);
                 // The given data did not pass validation
             } else {
-
+                $userTbl = DB::table('users')->where('id',$eid)->first();
                 $admin = Input::get('eadmincheck');
                 if ($admin == null) {
                     $admin = 0;
                 }
                 $filename = "";
                 if(Input::hasFile('eproimg')) {
-                    $imageFile = Input::file('proimg');
+                    $imageFile = Input::file('eproimg');
                     if ($imageFile != null) {
                     $filename = time() . '-profile_photo' . '.' . $imageFile->getClientOriginalExtension();
                     $imageFile->move('profileimg', $filename);
                     $ext = $imageFile->getClientOriginalExtension();
                 }else{
-                       $userTbl = DB::table('users')->where('id',$eid)->first();
+                       // echo 'imageFile null';
+                       
                         $filename = $userTbl->image;
                     }
 
+                }else{
+                       // echo 'imageFile null';
+                       
+                        $filename = $userTbl->image;
+                    }
+
+                $passwd = Hash::make(Input::get('epassword'));
+                if(Input::get('epassword')!=null&&Input::get('epassword')!=""){
+                                $passwd = Hash::make(Input::get('epassword'));
+                  //  DB::table('users')->where('id',$eid)->update(['remember_token'=>'']);
+                }else{
+                $passwd = $userTbl->password;
                 }
 
 
                 $updateData = [['name'=>Input::get('ename')],['designation'=>Input::get('edesignation')],['duty'=>Input::get('eduty')],['note'=>Input::get('enote')],['email'=>Input::get('eemail')],['username'=>Input::get('eusername')],
                 ['password'=>Hash::make(Input::get('epassword'))],['level'=>Input::get('eadmin')],['image'=>$filename]];
                 $updateDataA = ['name'=>Input::get('ename'),'designation'=>Input::get('edesignation'),'duty'=>Input::get('eduty'),'note'=>Input::get('enote'),'email'=>Input::get('eemail'),'username'=>Input::get('eusername'),
-                    'password'=>Hash::make(Input::get('epassword')),'level'=>Input::get('eadmin'),'image'=>$filename];
+                    'password'=>$passwd,'level'=>Input::get('eadmin'),'image'=>$filename];
                 DB::table('users')->where('id',$eid)->update($updateDataA);
 
                 return Redirect('emp_detail?id='.$eid);

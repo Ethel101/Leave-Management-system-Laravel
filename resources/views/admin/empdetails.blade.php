@@ -21,6 +21,44 @@ $totalLeav = $leavDb->totalleave;
 }
 ?>
 
+
+
+ <?php
+                       $totalDaysYear = 0;
+                        $actualLeaveDates = Array();
+                        $userLeavDb = DB::table('leave')->where('empid',$userId)->get();
+                        date_default_timezone_set("Asia/Kolkata");
+                        $dateStringUp = '01-01-'.date('Y');
+                        $todayDate = date('d-m-Y');
+                        $upperDate = new DateTime($dateStringUp);
+                        $lowerDate = new DateTime($todayDate);
+                        $lowerDate->modify('+1 day');
+                        $period = new DatePeriod($upperDate,new DateInterval('P1D'),$lowerDate);
+
+                           foreach($userLeavDb as $userLeav){
+                            $startD = new DateTime($userLeav->startdate);
+                            $endD = new DateTime($userLeav->enddate);
+                             $endD->modify('+1 day');
+                            $periodLeaveDate = new DatePeriod( $startD,new DateInterval('P1D'),$endD);
+
+                             foreach($period as $date){
+                               //echo $date->format("d-m-Y") . "";
+                               foreach($periodLeaveDate as $datel){
+                                    // echo $datel->format("d-m-Y") . "  ";
+                                    if($date->format("d-m-Y")==$datel->format("d-m-Y")){
+                                    $actualLeaveDatesinYear[] =$date->format("Y-m-d")."";
+                                   // echo "equal ".$date->format("d-m-Y");
+                                    $totalDaysYear++;
+                                    }
+                               }
+                             }
+                            }
+                            //echo $totalDays."  = days"
+
+
+
+                        ?>
+
 <div class="page-content-wrap">
 
                     <div class="row">
@@ -52,7 +90,7 @@ $totalLeav = $leavDb->totalleave;
                                     <a href="#" class="list-group-item active"><span class="fa fa-bar-chart-o"></span> Activity</a>
                                      <a href="#" class="list-group-item"><span class="fa fa-users"></span> Username <span class="badge badge-danger">{{$userObj->username}}</span></a>
                                       <a href="#" class="list-group-item"><span class="fa fa-users"></span> Email <span class="badge badge-danger">{{$userObj->email}}</span></a>
-                                    <a href="#" class="list-group-item"><span class="fa fa-users"></span> Total Leave <span class="badge badge-danger">{{$totalLeav}}</span></a>
+                                    <a href="#" class="list-group-item"><span class="fa fa-users"></span> Total Leave in this Year <span class="badge badge-danger">{{$totalDaysYear}}</span></a>
                                     <a href="#" class="list-group-item"><span class="fa fa-folder"></span> Duty<span class="badge badge-danger">{{$userObj->duty}}</span></a>
                                     <a href="#" class="list-group-item"><span class="fa fa-cog"></span> Settings</a>
                                 </div>
@@ -102,39 +140,7 @@ $totalLeav = $leavDb->totalleave;
 
                                                                                                                                 </form>
 
-                        <?php
-                     /*   $totalDays = 0;
-                        $actualLeaveDates = Array();
-                        $userLeavDb = DB::table('leave')->where('empid',$userId)->get();
-                        date_default_timezone_set("Asia/Kolkata");
-                        $upperDate = new DateTime('1-11-2016');
-                        $lowerDate = new DateTime('30-12-2016');
-                        $lowerDate->modify('+1 day');
-                        $period = new DatePeriod($upperDate,new DateInterval('P1D'),$lowerDate);
 
-                           foreach($userLeavDb as $userLeav){
-                            $startD = new DateTime($userLeav->startdate);
-                            $endD = new DateTime($userLeav->enddate);
-                             $endD->modify('+1 day');
-                            $periodLeaveDate = new DatePeriod( $startD,new DateInterval('P1D'),$endD);
-
-                             foreach($period as $date){
-                               //echo $date->format("d-m-Y") . "";
-                               foreach($periodLeaveDate as $datel){
-                                    // echo $datel->format("d-m-Y") . "  ";
-                                    if($date->format("d-m-Y")==$datel->format("d-m-Y")){
-                                    $actualLeaveDates[] =$date->format("Y-m-d")."";
-                                   // echo "equal ".$date->format("d-m-Y");
-                                    $totalDays++;
-                                    }
-                               }
-                             }
-                            }
-                            echo $totalDays."  = days"
-
-
-*/
-                        ?>
  <!-- START CONTENT FRAME BODY -->
 
  @if(isset($uId)&&isset($total_days)&&isset($leaveDates))

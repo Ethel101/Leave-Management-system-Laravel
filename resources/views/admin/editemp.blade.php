@@ -104,7 +104,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label">Image</label>
                                                 <div class="col-md-9">
-                                                    <input type="file" class="fileinput btn-primary" name="eproimg" id="proimg" value="{{$emp->image}}" title="Browse file"/>
+                                                    <input type="file" class="fileinput btn-primary" name="eproimg" id="proimg"  title="Browse file"/>
                                                     <span class="help-block">Image of employee</span>
                                                 </div>
                                             </div>
@@ -141,7 +141,7 @@
                                                                                           <div class="col-md-9 col-xs-12">
                                                                                               <div class="input-group">
                                                                                                   <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
-                                                                                                  <input type="password" class="form-control" name="epassword" value="{{$emp->name}}" />
+                                                                                                  <input type="password" class="form-control" name="epassword" value="" />
 
 
                                                                                               </div>

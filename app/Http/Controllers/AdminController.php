@@ -426,6 +426,17 @@ class AdminController extends Controller
 
         }
 
+     function getPref(){
+         if($this->checkAdmin()){
+
+        return view('admin.pref');
+
+         }else{
+             return Redirect('admin_login');
+         }
+
+         }
+
 
 
 }

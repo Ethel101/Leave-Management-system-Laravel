@@ -31,6 +31,9 @@ $leaveTypeDb = DB::table('leavetype')->get();
                                                 <td>{{$leaveItem->lid}}</td>
                                                 <td>{{$leaveItem->name}}</td>
                                                 <td>{{$leaveItem->llimit}}</td>
+                                                <td> <input type="text" name="lval" class="form-control" value=""/></td>
+                                                <td> <a href="{{url('/emp_detail?id='.$user->id)}}" type="button" class="btn btn-info">Update limit</a>
+
                                             </tr>
                                             @endforeach
 

@@ -47,6 +47,7 @@ Route::get('/admin_pref', 'AdminController@getPref');
 
 
 
+
 Route::get('/popuser', 'AdminController@populateUser');
 
 Route::get('/test','AdminController@test');

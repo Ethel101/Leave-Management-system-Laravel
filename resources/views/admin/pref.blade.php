@@ -5,6 +5,15 @@
 <?php
 $leaveTypeDb = DB::table('leavetype')->get();
 
+function inflatePreference(){
+
+//$model = new \App\Leavetype();
+
+
+}
+
+
+
 ?>
 
 
@@ -42,9 +51,71 @@ $leaveTypeDb = DB::table('leavetype')->get();
                                 </div>
                             </div>
                             <!-- END CONTEXTUAL CLASSES TABLE SAMPLE -->
+                            <form class="form-horizontal" method="post" action="{{url('/add_ltype')}}" enctype="multipart/form-data">
+
+ <div class="panel panel-default">
+  <div class="panel-heading">
+                                     <h3 class="panel-title">Leave Types</h3>
+                                 </div>
+
+<div class="row">
+                                        <div class="col-md-3" style="margin-top: 20px">
+
+                                            <div class="form-group">
+                                                <label class="col-md-6 control-label">Leave ID</label>
+                                                <div class="col-md-9">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                        <input type="text" name="lid" class="form-control"/>
+                                                    </div>
+                                                    <span class="help-block">in numericals</span>
+                                                </div>
+                                            </div>
+                                            </div>
 
 
+                                        <div class="col-md-3" style="margin-top: 20px">
 
+
+                                             <div class="form-group">
+                                                                                            <label class="col-md-6 control-label">Leave Type Name</label>
+                                                                                            <div class="col-md-9">
+                                                                                                <div class="input-group">
+                                                                                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                                                                    <input type="text" name="lname" class="form-control"/>
+                                                                                                </div>
+                                                                                                <span class="help-block"></span>
+                                                                                            </div>
+                                                                                        </div>
+
+</div>
+
+                                        <div class="col-md-3" style="margin-top: 20px">
+
+                                             <div class="form-group">
+                                                <label class="col-md-6 control-label">Limit (Days)</label>
+                                                <div class="col-md-9">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                        <input type="text" class="form-control" name="llimit"/>
+                                                    </div>
+                                                    <span class="help-block">in numericals</span>
+                                                </div>
+                                            </div>
+                                            </div>
+                                    </div>
+                                    <div class="row">
+
+                                    <div class="col-md-3"><button style="margin-top: 20px;margin-bottom: 20px" class="btn btn-primary pull-center">Add Leave Type</button></div>
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-3"></div>
+
+
+                                                                        </div>
+
+                                    </div>
+
+</form>
 
 
 @endsection

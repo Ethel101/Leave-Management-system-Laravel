@@ -437,6 +437,21 @@ class AdminController extends Controller
 
          }
 
+function postAddLtype(){
+    if($this->checkAdmin()){
+        $lid = Input::get('lid');
+        $lname = Input::get('lname');
+        $llimit = Input::get('llimit');
+        if($lid!=null&&$lname!=null&&$llimit!=null){
 
+        }
+
+
+
+    }else{
+        return Redirect('admin_login');
+
+    }
+}
 
 }

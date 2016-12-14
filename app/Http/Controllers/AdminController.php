@@ -3,6 +3,7 @@
 
 
 use App\Leave;
+use App\Leavetype;
 use App\User;
 
 use Illuminate\Http\Request;
@@ -428,7 +429,7 @@ class AdminController extends Controller
 
      function getPref(){
          if($this->checkAdmin()){
-
+        //echo 'sdfdsfsdfsd';
         return view('admin.pref');
 
          }else{
@@ -444,7 +445,45 @@ function postAddLtype(){
         $llimit = Input::get('llimit');
         if($lid!=null&&$lname!=null&&$llimit!=null){
 
+            $validator = Validator::make(
+                [
+                    'lid' => Input::get('lid'),
+                    'name' => Input::get('lname'),
+                    'limit' => Input::get('llimit')
+
+                ],
+                [
+
+                    'lid' => 'required|integer|unique:leavetype',
+                    'name' => 'required',
+                    'limit' => 'required|integer'
+
+
+                ]
+            );
+
+            if ($validator->fails()) {
+
+                $messages = $validator->messages();
+                $erLid = $messages->first('lid');
+                $erName = $messages->first('name');
+                $erLimit = $messages->first('limit');
+                // dd($validator);
+                return view('admin.pref')->withErrors($validator);
+                // The given data did not pass validation
+            } else {
+                $type = new Leavetype();
+                $type->lid = $lid;
+                $type->name = $lname;
+                $type->limit  = $llimit;
+                $type->save();
+
+                return Redirect('admin_pref');
+            }
+
         }
+
+
 
 
 

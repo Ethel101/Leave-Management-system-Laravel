@@ -16,7 +16,7 @@ class CreateLeavetypeTable extends Migration {
         Schema::create('leavetype', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->string('lid');
+            $table->string('lid')->unique();
             // $table->string('name')->nullable();
 
             $table->string('name')->nullable();

@@ -42,7 +42,7 @@ Route::get('/admin_leaves', 'AdminController@getLeaveRequest');
 Route::get('/leave', 'AdminController@getLeaveAction');
 
 Route::get('/admin_pref', 'AdminController@getPref');
-Route::get('/add_ltype', 'AdminController@postAddLtype');
+Route::post('/add_ltype', 'AdminController@postAddLtype');
 
 
 

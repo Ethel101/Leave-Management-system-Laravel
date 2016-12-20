@@ -49,6 +49,9 @@
                      <li class="active">
                        <a href="{{url('/add_emp')}}"><span class="fa fa-desktop"></span> <span class="xn-text">Add New Employees</span></a>
                        </li>
+                    <li class="active">
+                        <a href="{{url('/admin_pref')}}"><span class="fa fa-desktop"></span> <span class="xn-text">Leave Types Settings</span></a>
+                    </li>
 
 
                 </ul>

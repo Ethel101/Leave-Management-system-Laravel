@@ -4,8 +4,7 @@
 
 <?php
 
-
-
+//include ''
 
 
 if(isset($uId)){
@@ -24,9 +23,13 @@ if(isset($uId)){
 
 
 <?php
+//echo 'total leav = '.\App\Http\Controllers\AdminController::calculateTotalLeave($userId);
+   //   echo  \App\Http\Controllers\AdminController::testOne();
+/*
 $totalDaysYear = 0;
 $actualLeaveDates = Array();
 $userLeavDb = DB::table('leave')->where('empid',$userId)->get();
+//dd($userLeavDb);
 date_default_timezone_set("Asia/Kolkata");
 $dateStringUp = '01-01-'.date('Y');
 $todayDate = date('d-m-Y');
@@ -53,8 +56,8 @@ foreach($userLeavDb as $userLeav){
         }
     }
 }
-//echo $totalDays."  = days"
-
+//echo $totalDaysYear."  = days"
+*/
 
 
 ?>
@@ -90,7 +93,7 @@ foreach($userLeavDb as $userLeav){
                     <a href="#" class="list-group-item active"><span class="fa fa-bar-chart-o"></span> Activity</a>
                     <a href="#" class="list-group-item"><span class="fa fa-users"></span> Username <span class="badge badge-danger">{{$userObj->username}}</span></a>
                     <a href="#" class="list-group-item"><span class="fa fa-users"></span> Email <span class="badge badge-danger">{{$userObj->email}}</span></a>
-                    <a href="#" class="list-group-item"><span class="fa fa-users"></span> Total Leave in this Year <span class="badge badge-danger">{{$totalDaysYear}}</span></a>
+                    <a href="#" class="list-group-item"><span class="fa fa-users"></span> Total Leave in this Year <span class="badge badge-danger">{{\App\Http\Controllers\AdminController::calculateTotalLeave($userId)}}</span></a>
                     <a href="#" class="list-group-item"><span class="fa fa-folder"></span> Duty<span class="badge badge-danger">{{$userObj->duty}}</span></a>
                     <a href="#" class="list-group-item"><span class="fa fa-cog"></span> Settings</a>
                 </div>

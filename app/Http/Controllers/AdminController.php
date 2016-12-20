@@ -23,48 +23,52 @@ class AdminController extends Controller
 
     }
 
-    function test(){
-       return view('admin.test');
+    function test()
+    {
+        return view('admin.test');
     }
 
-    function populateUser(){
+    function populateUser()
+    {
 
         $demoUser = new User();
         $demoUser->name = 'demo user';
         $demoUser->username = 'demo';
         $demoUser->level = '1';
 
-        $demoUser->password  = Hash::make('pass');
+        $demoUser->password = Hash::make('pass');
         $demoUser->save();
-
 
 
     }
 
-    function checkAdmin(){
-        if(Auth::check()&&Auth::user()->level=='1'){
+    function checkAdmin()
+    {
+        if (Auth::check() && Auth::user()->level == '1') {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    function redirectAdminLogin(){
+    function redirectAdminLogin()
+    {
         return Redirect('admin_login');
     }
 
 
-
-    function adminLoginGet(){
-        if($this->checkAdmin()){
+    function adminLoginGet()
+    {
+        if ($this->checkAdmin()) {
 
             return Redirect('admin_dashboard');
-        }else{
-        return view('admin.adminlogin');
+        } else {
+            return view('admin.adminlogin');
         }
     }
 
-    function adminLoginPost(){
+    function adminLoginPost()
+    {
 
         $username = Input::get('username');
         $pass = Input::get('password');
@@ -99,9 +103,9 @@ class AdminController extends Controller
 
             ])
             ) {
-                if(Auth::user()->level == '1') {
+                if (Auth::user()->level == '1') {
                     return redirect('admin_dashboard');
-                }else{
+                } else {
                     $err1 = new MessageBag(['i' => ['Not enough permission to access admin panel']]);
                     return Redirect('admin_login')->withErrors($err1);
                 }
@@ -118,27 +122,29 @@ class AdminController extends Controller
     }
 
 
-
-        function adminDashGet(){
-            if($this->checkAdmin()){
-                return view('admin.dashboard');
-            }else{
-               return  $this->redirectAdminLogin();
-            }
+    function adminDashGet()
+    {
+        if ($this->checkAdmin()) {
+            return view('admin.dashboard');
+        } else {
+            return $this->redirectAdminLogin();
+        }
 
     }
 
 
-    function userLogout(){
+    function userLogout()
+    {
         Auth::logout();
         return Redirect('admin_login');
     }
 
-    function addEmployee(){
+    function addEmployee()
+    {
 
-        if($this->checkAdmin()){
-           return view('admin.addemp');
-        }else{
+        if ($this->checkAdmin()) {
+            return view('admin.addemp');
+        } else {
             return Redirect('admin_login');
         }
 
@@ -177,12 +183,12 @@ class AdminController extends Controller
                 // The given data did not pass validation
             } else {
 
-                    $admin = Input::get('admincheck');
-                if($admin==null){
+                $admin = Input::get('admincheck');
+                if ($admin == null) {
                     $admin = 0;
                 }
 
-            $user = new User();
+                $user = new User();
                 $user->name = Input::get('name');
                 $user->designation = Input::get('designation');
                 $user->duty = Input::get('duty');
@@ -192,58 +198,62 @@ class AdminController extends Controller
                 $user->email = Input::get('email');
                 $user->level = $admin;
 
-                if(Input::hasFile('proimg')){
+                if (Input::hasFile('proimg')) {
                     $imageFile = Input::file('proimg');
                     $filename = time() . '-profile_photo' . '.' . $imageFile->getClientOriginalExtension();
                     $imageFile->move('profileimg', $filename);
                     $ext = $imageFile->getClientOriginalExtension();
-                   $user->image = $filename;
+                    $user->image = $filename;
                 }
 
                 $user->save();
-                return view('admin.addemp')->with('success','Employee Successfully saved');
+                return view('admin.addemp')->with('success', 'Employee Successfully saved');
 
             }
         }
     }
 
-    function deleteEmployees(){
-        if($this->checkAdmin()){
+    function deleteEmployees()
+    {
+        if ($this->checkAdmin()) {
             $inputId = Input::get('id');
-            if($inputId!=null){
-                DB::table('users')->where('id',$inputId)->delete();
+            if ($inputId != null) {
+                DB::table('users')->where('id', $inputId)->delete();
             }
             return Redirect('admin_dashboard');
-        }else{
-         return   $this->redirectAdminLogin();
+        } else {
+            return $this->redirectAdminLogin();
         }
     }
 
-    function getProfileView(){
-        if($this->checkAdmin()){
+    function getProfileView()
+    {
+        if ($this->checkAdmin()) {
             $id = Input::get('id');
-            $users = DB::table('users')->where('id',$id)->first();
-            return view('admin.empdetails')->with('uId',$id);
-        }else{
+            $users = DB::table('users')->where('id', $id)->first();
+            return view('admin.empdetails')->with('uId', $id);
+        } else {
             return $this->redirectAdminLogin();
         }
     }
 
-    function  getUpdateEmp(){
+    function getUpdateEmp()
+    {
 
-        if($this->checkAdmin()){
-        $eid = Input::get('eid');
-        if($eid!=null){
-            return view('admin.editemp')->with('eid',$eid);
-        }
-        }else{
+        if ($this->checkAdmin()) {
+            $eid = Input::get('eid');
+            if ($eid != null) {
+                return view('admin.editemp')->with('eid', $eid);
+            }
+        } else {
             return $this->redirectAdminLogin();
         }
     }
 
-    function  postUpdateEmp(){
+    function postUpdateEmp()
+    {
 
-        if($this->checkAdmin()){
+        if ($this->checkAdmin()) {
             $eid = Input::get('eid');
             $validator = Validator::make(
                 [
@@ -259,9 +269,9 @@ class AdminController extends Controller
                 ],
                 [
 
-                    'email' => 'required|email|unique:users,email,'.$eid,
+                    'email' => 'required|email|unique:users,email,' . $eid,
                     'password' => 'min:3',
-                    'username' => 'required|unique:users,username,'.$eid
+                    'username' => 'required|unique:users,username,' . $eid
                 ]
             );
             if ($validator->fails()) {
@@ -274,223 +284,268 @@ class AdminController extends Controller
                 return view('admin.addemp')->withErrors($validator);
                 // The given data did not pass validation
             } else {
-                $userTbl = DB::table('users')->where('id',$eid)->first();
+                $userTbl = DB::table('users')->where('id', $eid)->first();
                 $admin = Input::get('eadmincheck');
                 if ($admin == null) {
                     $admin = 0;
                 }
                 $filename = "";
-                if(Input::hasFile('eproimg')) {
+                if (Input::hasFile('eproimg')) {
                     $imageFile = Input::file('eproimg');
                     if ($imageFile != null) {
-                    $filename = time() . '-profile_photo' . '.' . $imageFile->getClientOriginalExtension();
-                    $imageFile->move('profileimg', $filename);
-                    $ext = $imageFile->getClientOriginalExtension();
-                }else{
-                       // echo 'imageFile null';
-                       
+                        $filename = time() . '-profile_photo' . '.' . $imageFile->getClientOriginalExtension();
+                        $imageFile->move('profileimg', $filename);
+                        $ext = $imageFile->getClientOriginalExtension();
+                    } else {
+                        // echo 'imageFile null';
+
                         $filename = $userTbl->image;
                     }
 
-                }else{
-                       // echo 'imageFile null';
-                       
-                        $filename = $userTbl->image;
-                    }
+                } else {
+                    // echo 'imageFile null';
+
+                    $filename = $userTbl->image;
+                }
 
                 $passwd = Hash::make(Input::get('epassword'));
-                if(Input::get('epassword')!=null&&Input::get('epassword')!=""){
-                                $passwd = Hash::make(Input::get('epassword'));
-                  //  DB::table('users')->where('id',$eid)->update(['remember_token'=>'']);
-                }else{
-                $passwd = $userTbl->password;
+                if (Input::get('epassword') != null && Input::get('epassword') != "") {
+                    $passwd = Hash::make(Input::get('epassword'));
+                    //  DB::table('users')->where('id',$eid)->update(['remember_token'=>'']);
+                } else {
+                    $passwd = $userTbl->password;
                 }
 
 
-                $updateData = [['name'=>Input::get('ename')],['designation'=>Input::get('edesignation')],['duty'=>Input::get('eduty')],['note'=>Input::get('enote')],['email'=>Input::get('eemail')],['username'=>Input::get('eusername')],
-                ['password'=>Hash::make(Input::get('epassword'))],['level'=>Input::get('eadmin')],['image'=>$filename]];
-                $updateDataA = ['name'=>Input::get('ename'),'designation'=>Input::get('edesignation'),'duty'=>Input::get('eduty'),'note'=>Input::get('enote'),'email'=>Input::get('eemail'),'username'=>Input::get('eusername'),
-                    'password'=>$passwd,'level'=>Input::get('eadmin'),'image'=>$filename];
-                DB::table('users')->where('id',$eid)->update($updateDataA);
+                $updateData = [['name' => Input::get('ename')], ['designation' => Input::get('edesignation')], ['duty' => Input::get('eduty')], ['note' => Input::get('enote')], ['email' => Input::get('eemail')], ['username' => Input::get('eusername')],
+                    ['password' => Hash::make(Input::get('epassword'))], ['level' => Input::get('eadmin')], ['image' => $filename]];
+                $updateDataA = ['name' => Input::get('ename'), 'designation' => Input::get('edesignation'), 'duty' => Input::get('eduty'), 'note' => Input::get('enote'), 'email' => Input::get('eemail'), 'username' => Input::get('eusername'),
+                    'password' => $passwd, 'level' => Input::get('eadmin'), 'image' => $filename];
+                DB::table('users')->where('id', $eid)->update($updateDataA);
 
-                return Redirect('emp_detail?id='.$eid);
+                return Redirect('emp_detail?id=' . $eid);
 
 
             }
-        }else{
+        } else {
             return $this->redirectAdminLogin();
         }
     }
 
 
-    function getLeaveRequest(){
-        if($this->checkAdmin()){
+    function getLeaveRequest()
+    {
+        if ($this->checkAdmin()) {
             return view('admin.listleaverequest');
-        }else{
+        } else {
             return Redirect('admin_login');
         }
     }
 
 
-    function  getLeaveAction(){
-        if($this->checkAdmin()){
+    function getLeaveAction()
+    {
+        if ($this->checkAdmin()) {
             $var = Input::get('var');
-            if($var == 2){
+            if ($var == 2) {
                 $id = Input::get('id');
-                if($id!=null){
-                $act = Input::get('act');
-                    if($act!=null){
-                if($act == 1){
-                    date_default_timezone_set("Asia/Kolkata");
-                    $currentDate = date("d/m/Y");
-                    $currentTime =  date("h:i:sa");
-                    $leaveItem =  DB::table('leaveapply')->where('id',$id)->first();
-                    $leave = new Leave();
-                    $leave->empid = $leaveItem->empid;
-                    $leave->application_id = $leaveItem->id;
-                    $leave->username = $leaveItem->username;
-                    $leave->totalleave = $leaveItem->totalleave;
-                    $leave->startdate = $leaveItem->start_date;
-                    $leave->enddate = $leaveItem->end_date;
-                    $leave->start_half = $leaveItem->start_half;
-                    $leave->end_half = $leaveItem->end_half;
-                    $leave->ondate = $currentDate;
-                    $leave->ontime = $currentTime;
-                    $leave->leave_type = $leaveItem->leave_type;
-                    $leave->save();
-                    DB::table('leaveapply')->where('id',$id)->update(['status'=>1]);
-                }elseif($act == 2){
-                     DB::table('leave')->where('application_id',$id)->delete();
-                    DB::table('leaveapply')->where('id',$id)->update(['status'=>2]);
-                }
+                if ($id != null) {
+                    $act = Input::get('act');
+                    if ($act != null) {
+                        if ($act == 1) {
+                            date_default_timezone_set("Asia/Kolkata");
+                            $currentDate = date("d/m/Y");
+                            $currentTime = date("h:i:sa");
+                            $leaveItem = DB::table('leaveapply')->where('id', $id)->first();
+                            $leave = new Leave();
+                            $leave->empid = $leaveItem->empid;
+                            $leave->application_id = $leaveItem->id;
+                            $leave->username = $leaveItem->username;
+                            $leave->totalleave = $leaveItem->totalleave;
+                            $leave->startdate = $leaveItem->start_date;
+                            $leave->enddate = $leaveItem->end_date;
+                            $leave->start_half = $leaveItem->start_half;
+                            $leave->end_half = $leaveItem->end_half;
+                            $leave->ondate = $currentDate;
+                            $leave->ontime = $currentTime;
+                            $leave->leave_type = $leaveItem->leave_type;
+                            $leave->save();
+                            DB::table('leaveapply')->where('id', $id)->update(['status' => 1]);
+                        } elseif ($act == 2) {
+                            DB::table('leave')->where('application_id', $id)->delete();
+                            DB::table('leaveapply')->where('id', $id)->update(['status' => 2]);
+                        }
                     }
-            }
+                }
             }
             return Redirect('admin_leaves');
-        }else{
+        } else {
             return Redirect('admin_login');
         }
     }
 
 
-
-
-    function getEmpInfoLeaveDeatils(){
-        if($this->checkAdmin()){
+    function getEmpInfoLeaveDeatils()
+    {
+        if ($this->checkAdmin()) {
             $upperDates = Input::get('upper_date');
             $lowerDates = Input::get('lower_date');
             $userId = Input::get('id');
-            if($upperDates!=null&&$lowerDates!=null&&$userId!=null){
+            if ($upperDates != null && $lowerDates != null && $userId != null) {
 
                 $totalDays = 0;
                 $actualLeaveDates = Array();
-                $userLeavDb = DB::table('leave')->where('empid',$userId)->get();
+                $userLeavDb = DB::table('leave')->where('empid', $userId)->get();
                 date_default_timezone_set("Asia/Kolkata");
 
                 $upperDate = new \DateTime($upperDates);
                 $lowerDate = new \DateTime($lowerDates);
                 $lowerDate->modify('+1 day');
-                $period = new \DatePeriod($upperDate,new \DateInterval('P1D'),$lowerDate);
+                $period = new \DatePeriod($upperDate, new \DateInterval('P1D'), $lowerDate);
 
-                foreach($userLeavDb as $userLeav){
+                foreach ($userLeavDb as $userLeav) {
                     $startD = new \DateTime($userLeav->startdate);
                     $endD = new \DateTime($userLeav->enddate);
                     $endD->modify('+1 day');
-                    $periodLeaveDate = new \DatePeriod( $startD,new \DateInterval('P1D'),$endD);
+                    $periodLeaveDate = new \DatePeriod($startD, new \DateInterval('P1D'), $endD);
 
-                    foreach($period as $date){
+                    foreach ($period as $date) {
                         //echo $date->format("d-m-Y") . "";
-                        foreach($periodLeaveDate as $datel){
+                        foreach ($periodLeaveDate as $datel) {
                             // echo $datel->format("d-m-Y") . "  ";
-                            if($date->format("d-m-Y")==$datel->format("d-m-Y")){
-                                $actualLeaveDates[] =$date->format("Y-m-d")."";
+                            if ($date->format("d-m-Y") == $datel->format("d-m-Y")) {
+                                $actualLeaveDates[] = $date->format("Y-m-d") . "";
                                 // echo "equal ".$date->format("d-m-Y");
                                 $totalDays++;
                             }
                         }
                     }
                 }
-            //    echo $totalDays."  = days";
-            //    dd($actualLeaveDates);
+                //    echo $totalDays."  = days";
+                //    dd($actualLeaveDates);
 
-            return view('admin.empdetails')->with('total_days',$totalDays)->with('leaveDates',$actualLeaveDates)->with('uId',$userId);
+                return view('admin.empdetails')->with('total_days', $totalDays)->with('leaveDates', $actualLeaveDates)->with('uId', $userId);
 
 
             }
 
 
-
-
-        }else{
+        } else {
             return Redirect('admin_login');
         }
 
+    }
+
+    function getPref()
+    {
+        if ($this->checkAdmin()) {
+            //echo 'sdfdsfsdfsd';
+            return view('admin.pref');
+
+        } else {
+            return Redirect('admin_login');
         }
-
-     function getPref(){
-         if($this->checkAdmin()){
-        //echo 'sdfdsfsdfsd';
-        return view('admin.pref');
-
-         }else{
-             return Redirect('admin_login');
-         }
-
-         }
-
-function postAddLtype(){
-    if($this->checkAdmin()){
-        $lid = Input::get('lid');
-        $lname = Input::get('lname');
-        $llimit = Input::get('llimit');
-        if($lid!=null&&$lname!=null&&$llimit!=null){
-
-            $validator = Validator::make(
-                [
-                    'lid' => Input::get('lid'),
-                    'name' => Input::get('lname'),
-                    'limit' => Input::get('llimit')
-
-                ],
-                [
-
-                    'lid' => 'required|integer|unique:leavetype',
-                    'name' => 'required',
-                    'limit' => 'required|integer'
-
-
-                ]
-            );
-
-            if ($validator->fails()) {
-
-                $messages = $validator->messages();
-                $erLid = $messages->first('lid');
-                $erName = $messages->first('name');
-                $erLimit = $messages->first('limit');
-                // dd($validator);
-                return view('admin.pref')->withErrors($validator);
-                // The given data did not pass validation
-            } else {
-                $type = new Leavetype();
-                $type->lid = $lid;
-                $type->name = $lname;
-                $type->limit  = $llimit;
-                $type->save();
-
-                return Redirect('admin_pref');
-            }
-
-        }
-
-
-
-
-
-    }else{
-        return Redirect('admin_login');
 
     }
-}
+
+    function postAddLtype()
+    {
+        if ($this->checkAdmin()) {
+            $lid = Input::get('lid');
+            $lname = Input::get('lname');
+            $llimit = Input::get('llimit');
+            if ($lid != null && $lname != null) {
+
+                $validator = Validator::make(
+                    [
+                        'lid' => Input::get('lid'),
+                        'name' => Input::get('lname'),
+                        'limit' => Input::get('llimit')
+
+                    ],
+                    [
+
+                        'lid' => 'required|integer|unique:leavetype',
+                        'name' => 'required',
+                        'limit' => 'integer'
+
+
+                    ]
+                );
+
+                if ($validator->fails()) {
+
+                    $messages = $validator->messages();
+                    $erLid = $messages->first('lid');
+                    $erName = $messages->first('name');
+                    $erLimit = $messages->first('limit');
+                    // dd($validator);
+                    return view('admin.pref')->withErrors($validator);
+                    // The given data did not pass validation
+                } else {
+                    if ($llimit == null || $llimit == 0) {
+                        $isLimit = 0;
+                    } else {
+                        $isLimit = 1;
+                    }
+
+
+                    $type = new Leavetype();
+                    $type->lid = $lid;
+                    $type->name = $lname;
+                    $type->limit = $llimit;
+                    $type->islimit = $isLimit;
+                    $type->save();
+
+                    return Redirect('admin_pref');
+                }
+
+            }
+
+
+        } else {
+            return Redirect('admin_login');
+
+        }
+    }
+
+
+    public static function calculateTotalLeave($userId)
+    {
+        // $userId ='1';
+        $totalDaysYear = 0;
+        $actualLeaveDates = Array();
+        $userLeavDb = DB::table('leave')->where('empid', $userId)->get();
+        date_default_timezone_set("Asia/Kolkata");
+        $dateStringUp = '01-01-' . date('Y');
+        $todayDate = date('d-m-Y');
+
+        $upperDate = new \DateTime($dateStringUp);
+        $lowerDate = new \DateTime($todayDate);
+        $lowerDate->modify('+1 day');
+        $period = new \DatePeriod($upperDate, new \DateInterval('P1D'), $lowerDate);
+
+        foreach ($userLeavDb as $userLeav) {
+            $startD = new \DateTime($userLeav->startdate);
+            $endD = new \DateTime($userLeav->enddate);
+            $endD->modify('+1 day');
+            $periodLeaveDate = new \DatePeriod($startD, new \DateInterval('P1D'), $endD);
+
+            foreach ($period as $date) {
+                //echo $date->format("d-m-Y") . "";
+                foreach ($periodLeaveDate as $datel) {
+                    // echo $datel->format("d-m-Y") . "  ";
+                    if ($date->format("d-m-Y") == $datel->format("d-m-Y")) {
+                        $actualLeaveDatesinYear[] = $date->format("Y-m-d") . "";
+                        // echo "equal ".$date->format("d-m-Y");
+                        $totalDaysYear++;
+                    }
+                }
+            }
+        }
+        return $totalDaysYear;
+
+    }
+
 
 }

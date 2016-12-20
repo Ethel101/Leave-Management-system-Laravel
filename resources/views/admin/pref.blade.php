@@ -104,7 +104,7 @@
                         <div class="col-md-9">
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                <input type="text" class="validate[required,custom[integer]] form-control" name="llimit"/>
+                                <input placeholder="( optional )" type="text" class="validate[required,custom[integer]] form-control" name="llimit"/>
                             </div>
                             <span class="help-block">in numericals</span>
                         </div>

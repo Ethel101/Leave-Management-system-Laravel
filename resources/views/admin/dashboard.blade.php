@@ -69,7 +69,8 @@
                                                     <td>{{$user->name}}</td>
                                                    <td>{{$user->designation}}</td>
                                                     <td>{{$user->duty}}</td>
-                                                   <td><?php if($leavDb!=null){if($leavDb->totalleave!=null){echo $leavDb->totalleave;}}  ?></td>
+                                                   <td><?php echo \App\Http\Controllers\AdminController::calculateTotalLeave($user->id);
+                                                       //if($leavDb!=null){if($leavDb->totalleave!=null){echo $leavDb->totalleave;}}  ?></td>
                                                    <td> <a href="{{url('/emp_detail?id='.$user->id)}}" type="button" class="btn btn-info">Info</a>
                                                                                                <a href="{{url('/update_emp?eid='.$user->id)}}"  type="button" class="btn btn-warning">Edit</a>
                                                                                                <a href="{{url('/emp_del?id='.$user->id)}}" onclick="return confirm('Do you really want Delete this user?');"  type="button" class="btn btn-danger">Delete</a></td>

@@ -20,6 +20,8 @@ class CreateLeavetypeTable extends Migration {
             // $table->string('name')->nullable();
 
             $table->string('name')->nullable();
+            $table->string('islimit')->nullable();
+
             $table->string('limit')->nullable();
             //$table->string('leave_type');
 

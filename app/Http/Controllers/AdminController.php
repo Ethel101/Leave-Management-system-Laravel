@@ -510,6 +510,17 @@ class AdminController extends Controller
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
     public static function calculateTotalLeave($userId)
     {
         // $userId ='1';
@@ -546,6 +557,8 @@ class AdminController extends Controller
         return $totalDaysYear;
 
     }
+
+
 
 
 }

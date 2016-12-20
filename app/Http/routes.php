@@ -69,6 +69,11 @@ Route::get('/request_leave','UserController@getLeaveReq');
 
 Route::post('/request_leave','UserController@postLeaveReq');
 
+Route::get('/profile','UserController@getProfile');
+Route::post('/profile','UserController@postProfileLeaveDates');
+
+
+
 Route::get('/test','AdminController@test');
 
 

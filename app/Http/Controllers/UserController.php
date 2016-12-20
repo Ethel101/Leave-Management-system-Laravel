@@ -227,5 +227,69 @@ if( $this->checkUserLogin()){
     }
 
 
+    function getProfile(){
+        if($this->checkUserLogin()){
+
+            return view('user.userprofile');
+
+        }else{
+            return Redirect('user_login');
+
+        }
+    }
+
+    function postProfileLeaveDates(){
+
+       if ($this->checkUserLogin()) {
+            $upperDates = Input::get('upper_date');
+            $lowerDates = Input::get('lower_date');
+            $userId =\Illuminate\Support\Facades\Auth::user()->id;
+            if ($upperDates != null && $lowerDates != null && $userId != null) {
+
+                $totalDays = 0;
+                $actualLeaveDates = Array();
+                $userLeavDb = DB::table('leave')->where('empid', $userId)->get();
+                date_default_timezone_set("Asia/Kolkata");
+
+                $upperDate = new \DateTime($upperDates);
+                $lowerDate = new \DateTime($lowerDates);
+                $lowerDate->modify('+1 day');
+                $period = new \DatePeriod($upperDate, new \DateInterval('P1D'), $lowerDate);
+
+                foreach ($userLeavDb as $userLeav) {
+                    $startD = new \DateTime($userLeav->startdate);
+                    $endD = new \DateTime($userLeav->enddate);
+                    $endD->modify('+1 day');
+                    $periodLeaveDate = new \DatePeriod($startD, new \DateInterval('P1D'), $endD);
+
+                    foreach ($period as $date) {
+                        //echo $date->format("d-m-Y") . "";
+                        foreach ($periodLeaveDate as $datel) {
+                            // echo $datel->format("d-m-Y") . "  ";
+                            if ($date->format("d-m-Y") == $datel->format("d-m-Y")) {
+                                $actualLeaveDates[] = $date->format("Y-m-d") . "";
+                                // echo "equal ".$date->format("d-m-Y");
+                                $totalDays++;
+                            }
+                        }
+                    }
+                }
+                //   echo $totalDays."  = days";
+                //  dd($actualLeaveDates);
+
+                return view('user.userprofile')->with('total_days', $totalDays)->with('leaveDates', $actualLeaveDates);
+
+
+            }
+
+
+        } else {
+            return Redirect('user_login');
+        }
+
+    }
+
+
+
 
 }

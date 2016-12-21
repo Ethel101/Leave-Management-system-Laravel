@@ -35,7 +35,15 @@
 
                                 </div>
                             @endif
+                                @if(isset($failDate))
+                                    <div style="margin-bottom: 40px" class="alert alert-danger" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                        <strong>Fail!</strong>
+                                        <p class="alert-material-red" >{{$failDate}}</p>
 
+
+                                    </div>
+                                @endif
 
                             @if($errors->first('email')!=null||$errors->first('username')!=null||$errors->first('password')!=null)
                                 <div class="alert alert-danger" role="alert">
@@ -82,7 +90,7 @@
                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                                 <input name="start_date" type="text" class="form-control datepicker" data-date-format="dd-mm-yyyy" value="" data-date-viewmode="years">
                                             </div>
-                                            <label class="check"><input name="start_half" type="checkbox" class="icheckbox" value="1"/> Second Half</label>
+                                           <!-- <label class="check"><input name="start_half" type="checkbox" class="icheckbox" value="1"/> Second Half</label> -->
                                             <!-- <span class="help-block">Leave starting date </span> -->
                                         </div>
                                     </div>
@@ -144,7 +152,7 @@
                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                                 <input name="end_date" type="text" class="form-control datepicker" data-date-format="dd-mm-yyyy" value="" data-date-viewmode="years">
                                             </div>
-                                            <label class="check"><input name="end_half" type="checkbox" class="icheckbox"  value="1"/> First Half</label>
+                                         <!--   <label class="check"><input name="end_half" type="checkbox" class="icheckbox"  value="1"/> First Half</label> -->
                                             <!-- <span class="help-block">Leave starting date </span> -->
                                         </div>
                                     </div>

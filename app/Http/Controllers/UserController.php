@@ -134,6 +134,7 @@ if( $this->checkUserLogin()){
         if($this->checkUserLogin()){
 
 
+
           //  $name = Input::get();
             $validator = Validator::make(
                 [
@@ -168,6 +169,9 @@ if( $this->checkUserLogin()){
 
                 $startHalf = Input::get('start_half');
                 $endHalf = Input::get('end_half');
+                $startDate = Input::get('start_date');
+                $endDate = Input::get('end_date');
+                if(strtotime($startDate) <= strtotime($endDate) ){
 
                 if($startHalf==null){
                     $startHalf = 0;
@@ -176,8 +180,7 @@ if( $this->checkUserLogin()){
                     $endHalf =0;
                 }
 
-                $startDate = Input::get('start_date');
-                $endDate = Input::get('end_date');
+
                 $begin = new \DateTime( $startDate );
                 $end = new \DateTime($endDate );
                 $difference = $begin->diff($end);
@@ -216,7 +219,10 @@ if( $this->checkUserLogin()){
 
                 $leaveModel->save();
                 return view('user.leaverequest')->with('success','Your application succesfully submitted !');
+                }else{
+                    return view('user.leaverequest')->with('failDate','Select a start date before end date. !');
 
+                }
             }
 
 

@@ -158,11 +158,14 @@ foreach($userLeavDb as $userLeav){
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="calendar">
+                        <div style="margin-bottom: 15px" class="calendar">
                             <div id="calendar"></div>
                         </div>
+                        <h1 class="panel-title">Total Days: {{$total_days}}</h1>
+
                     </div>
                 </div>
+
 
             </div>
             <!-- END CONTENT FRAME BODY -->

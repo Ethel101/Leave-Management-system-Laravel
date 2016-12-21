@@ -34,6 +34,8 @@
                                                     <th width="100">Start Date</th>
                                                     <th width="100">End Date</th>
                                                     <th width="100">Total Days</th>
+                                                    <th width="100">Total Leave this year</th>
+
                                                     <th width="100">Created at</th>
 
                                                      <th width="100">Status</th>
@@ -55,13 +57,14 @@
                                              ?>
                                                 <tr id="trow_1">
                                                     <td class="text-center">1</td>
-                                                    <td><strong>{{$leaveObj->name}}</strong></td>
+                                                    <td><strong><a href="{{url('/emp_detail?id='.$leaveObj->empid)}}"> {{$leaveObj->name}}</a></strong></td>
                                                      <td>{{$leaveObj->number}}</td>
                                                       <td>{{$leaveObj->leave_type}}</td>
                                                       <td>{{$leaveObj->reason}}</td>
                                                       <td>{{$leaveObj->start_date}}</td>
                                                       <td>{{$leaveObj->end_date}}</td>
                                                       <td>{{$leaveObj->totalleave}}</td>
+                                                    <td>{{\App\Http\Controllers\AdminController::calculateTotalLeave($leaveObj->empid)}}</td>
                                                        <td>{{$leaveObj->ontime}}<br>{{$leaveObj->ondate}}</td>
                                                       @if($stat== 0)
                                                     <td><span class="label label-warning">Pending</span></td>

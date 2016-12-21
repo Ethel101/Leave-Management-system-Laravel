@@ -104,9 +104,9 @@ if( $this->checkUserLogin()){
 
     function userLogout(){
 
-        if(Auth::logout()){
+        Auth::logout();
             return Redirect('user_login');
-        }
+
 
     }
 
@@ -286,6 +286,46 @@ if( $this->checkUserLogin()){
         } else {
             return Redirect('user_login');
         }
+
+    }
+
+
+
+    public static function getEachLeaveCount($uId,$lId){
+
+        $totalDaysYear = 0;
+        $actualLeaveDates = Array();
+        $userLeavDb = DB::table('leave')->where('empid', $uId)->where('leave_type',$lId)->get();
+        date_default_timezone_set("Asia/Kolkata");
+        $dateStringUp = '01-01-' . date('Y');
+        $todayDate = date('d-m-Y');
+
+        $upperDate = new \DateTime($dateStringUp);
+        $lowerDate = new \DateTime($todayDate);
+        $lowerDate->modify('+1 day');
+        $period = new \DatePeriod($upperDate, new \DateInterval('P1D'), $lowerDate);
+
+        foreach ($userLeavDb as $userLeav) {
+            $startD = new \DateTime($userLeav->startdate);
+            $endD = new \DateTime($userLeav->enddate);
+            $endD->modify('+1 day');
+            $periodLeaveDate = new \DatePeriod($startD, new \DateInterval('P1D'), $endD);
+
+            foreach ($period as $date) {
+                //echo $date->format("d-m-Y") . "";
+                foreach ($periodLeaveDate as $datel) {
+                    // echo $datel->format("d-m-Y") . "  ";
+                    if ($date->format("d-m-Y") == $datel->format("d-m-Y")) {
+
+                        $actualLeaveDatesinYear[] = $date->format("Y-m-d") . "";
+                        // echo "equal ".$date->format("d-m-Y");
+                        $totalDaysYear++;
+                    }
+                }
+            }
+          }
+
+        return $totalDaysYear;
 
     }
 

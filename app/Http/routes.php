@@ -60,7 +60,7 @@ Route::get('/test','AdminController@test');
 
 Route::get('/user_login','UserController@getLoginPage');
 Route::post('/user_login','UserController@loginPost');
-Route::get('/user_logout','UserController@userLogout');
+Route::get('/logout','UserController@userLogout');
 
 
 Route::get('/user_dash','UserController@getDashUser');

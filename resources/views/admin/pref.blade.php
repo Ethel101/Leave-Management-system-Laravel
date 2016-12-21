@@ -62,7 +62,7 @@
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Leave Types</h3>
+                <h3 class="panel-title">Add new Leave Type</h3>
             </div>
 
             <div class="row">

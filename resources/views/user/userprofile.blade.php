@@ -46,7 +46,13 @@ $userObj = DB::table('users')->where('id',$uId)->first();
                         <a href="#" class="list-group-item"><span class="fa fa-users"></span> Email <span class="badge badge-danger">{{$userObj->email}}</span></a>
                         <a href="#" class="list-group-item"><span class="fa fa-users"></span> Total Leave in this Year <span class="badge badge-danger">{{\App\Http\Controllers\AdminController::calculateTotalLeave($uId)}}</span></a>
                         <a href="#" class="list-group-item"><span class="fa fa-folder"></span> Duty<span class="badge badge-danger">{{$userObj->duty}}</span></a>
-                        <a href="#" class="list-group-item"><span class="fa fa-cog"></span> Settings</a>
+                    </div>
+                    <div class="panel-body list-group border-bottom">
+                        <a href="#" class="list-group-item active"><span class="fa fa-bar-chart-o"></span> Leave Details</a>
+                        <?php $dbLeaveTypes = DB::table('leavetype')->get();?>
+                        @foreach($dbLeaveTypes as $itemLtype)
+                            <a href="#" class="list-group-item"><span class="fa fa-users"></span> {{$itemLtype->name}} <span class="badge badge-danger">{{\App\Http\Controllers\UserController::getEachLeaveCount($uId,$itemLtype->lid)}}</span></a>
+                        @endforeach
                     </div>
 
                 </div>

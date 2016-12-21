@@ -31,7 +31,11 @@
                     <li class="xn-profile">
 
                         <div class="profile">
-
+                            @if($user->image!=null&&$user->image!='')
+                            <div class="profile-image">
+                                <img src="profileimg/{{$user->image}}" alt="{{$user->username}}"/>
+                            </div>
+                            @endif
                             <div class="profile-data">
                                 <div class="profile-data-name">{{$user->username}}</div>
                                 <div class="profile-data-title">{{$user->email}}</div>
@@ -42,6 +46,9 @@
                     <li class="xn-title">Navigation</li>
                     <li class="active">
                         <a href="{{url('/user_dash')}}"><span class="fa fa-desktop"></span> <span class="xn-text">Dashboard</span></a>
+                    </li>
+                    <li class="active">
+                        <a href="{{url('/profile')}}"><span class="fa fa-desktop"></span> <span class="xn-text">My Profile</span></a>
                     </li>
                      <li class="active">
                                             <a href="{{url('/request_leave')}}"><span class="fa fa-desktop"></span> <span class="xn-text">Apply for Leave</span></a>
@@ -107,7 +114,6 @@
                     <div class="mb-title"><span class="fa fa-sign-out"></span> Log <strong>Out</strong> ?</div>
                     <div class="mb-content">
                         <p>Are you sure you want to log out?</p>
-                        <p>Press No if youwant to continue work. Press Yes to logout current user.</p>
                     </div>
                     <div class="mb-footer">
                         <div class="pull-right">

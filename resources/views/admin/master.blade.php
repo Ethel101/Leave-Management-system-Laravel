@@ -31,7 +31,12 @@
                     <li class="xn-profile">
 
                         <div class="profile">
+                            @if($user->image!=null&&$user->image!='')
 
+                            <div class="profile-image">
+                                <img src="profileimg/{{$user->image}}" alt="{{$user->username}}"/>
+                            </div>
+                            @endif
                             <div class="profile-data">
                                 <div class="profile-data-name">{{$user->username}}</div>
                                 <div class="profile-data-title">{{$user->email}}</div>
@@ -114,7 +119,6 @@
                     <div class="mb-title"><span class="fa fa-sign-out"></span> Log <strong>Out</strong> ?</div>
                     <div class="mb-content">
                         <p>Are you sure you want to log out?</p>
-                        <p>Press No if youwant to continue work. Press Yes to logout current user.</p>
                     </div>
                     <div class="mb-footer">
                         <div class="pull-right">

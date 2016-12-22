@@ -37,6 +37,7 @@ $iid = \Illuminate\Support\Facades\Auth::user()->id;
                                                     <th width="100">End Date</th>
                                                     <th width="100">Total Days</th>
                                                     <th width="100">Status</th>
+                                                    <th width="100">Reason</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -68,6 +69,8 @@ $iid = \Illuminate\Support\Facades\Auth::user()->id;
                                                      @elseif($stat == 2)
                                                       <td><span class="label label-danger">Rejected</span></td>
                                                       @endif
+                                                    <td>{{$leaveObj->rejreason}}</td>
+
 
                                                 </tr>
                                                 @endforeach

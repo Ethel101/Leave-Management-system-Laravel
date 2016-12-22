@@ -25,6 +25,7 @@ class LeaveApply extends Migration {
             $table->string('start_half');
             $table->string('end_half');
             $table->string('number');
+            $table->string('rejreason')->nullable();
             $table->string('reason');
             $table->string('totalleave')->nullable();
             $table->string('status');

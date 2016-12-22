@@ -345,7 +345,9 @@ class AdminController extends Controller
 
     function getLeaveAction()
     {
+        //dd(Input::get('rejreason'));
         if ($this->checkAdmin()) {
+            $rejreason = Input::get('rejreason');
             $var = Input::get('var');
             if ($var == 2) {
                 $id = Input::get('id');
@@ -369,11 +371,15 @@ class AdminController extends Controller
                             $leave->ondate = $currentDate;
                             $leave->ontime = $currentTime;
                             $leave->leave_type = $leaveItem->leave_type;
+                            //$leave->rejreason = Input::get('rejreason');
                             $leave->save();
                             DB::table('leaveapply')->where('id', $id)->update(['status' => 1]);
+                            DB::table('leaveapply')->where('id', $id)->update(['rejreason' => ""]);
+
                         } elseif ($act == 2) {
                             DB::table('leave')->where('application_id', $id)->delete();
                             DB::table('leaveapply')->where('id', $id)->update(['status' => 2]);
+                        DB::table('leaveapply')->where('id', $id)->update(['rejreason' => $rejreason]);
                         }
                     }
                 }

@@ -39,7 +39,9 @@
                                                     <th width="100">Created at</th>
 
                                                      <th width="100">Status</th>
-                                                      <th width="100">Action</th>
+                                                    <th width="100">Action Reason</th>
+
+                                                    <th width="100">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -73,10 +75,16 @@
                                                      @elseif($stat == 2)
                                                       <td><span class="label label-danger">Rejected</span></td>
                                                       @endif
+
+
+                                                    <td>{{$leaveObj->rejreason}}</td>
+
                                                     <td>@if($stat != 1)
                                                         <a href="{{url('/leave?id='.$leaveObj->id.'&act=1&var=2')}}" type="button" class="btn btn-success">Approve</a>
                                                         @endif
-                                                        <a href="{{url('/leave?id='.$leaveObj->id.'&act=2&var=2')}}" type="button" class="btn btn-danger">Reject</a>
+                                                     <!--   <a href="{{url('/leave?id='.$leaveObj->id.'&act=2&var=2')}}" type="button" class="btn btn-danger">Reject</a> -->
+                                                        <a href="#" class="mb-control btn btn-danger" data-box="#mb-reject" onclick="setVal({{$leaveObj->id}})" type="button" >Reject</a>
+
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -91,4 +99,51 @@
                         </div>
                     </div>
                     <!-- END RESPONSIVE TABLES -->
+
+
+
+<!-- MESSAGE BOX-->
+<div class="message-box animated fadeIn" data-sound="" id="mb-reject">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <form action="" name="rejform" id="rejform" method="post">
+
+            <div class="mb-title"><span class="fa fa-sign-out"></span> Reject <strong>Leave Request</strong> ?</div>
+            <div class="mb-content">
+                <p>Please specify reason for the rejection. </p>
+                <div class="form-group">
+                    <textarea class="form-control" name="rejreason" rows="5"></textarea>
+                    <input type="hidden" name="act" value="2" hidden/>
+                    <input type="hidden" name="var"  value="2" hidden/>
+                    <input type="hidden" value="{{ csrf_token()  }}" name="_token">
+
+                </div>
+            </div>
+
+            <div class="mb-footer">
+                <div class="pull-right">
+                    <button id="rejyes" type="submit" class="btn btn-success btn-lg">Yes</button>
+                    <button class="btn btn-default btn-lg mb-control-close">No</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- END MESSAGE BOX -->
+ <!-- &act=2&var=2" -->
+     <script>
+
+function setVal(id) {
+    console.log('inside set val')
+    <?php $rejId = "<script>document.write(id)</script>" ?>
+    document.getElementById("rejform").action= "leave?id="+id;
+}
+
+
+
+     </script>
+
+
+
                 @endsection

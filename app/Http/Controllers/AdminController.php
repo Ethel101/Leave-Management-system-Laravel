@@ -526,6 +526,46 @@ class AdminController extends Controller
     }
 
 
+
+
+    function getDeleteLType(){
+        if($this->checkAdmin()){
+            $id = Input::get('id');
+            if($id!=null){
+                $this->deleteLeaveType($id);
+            }
+            return Redirect('admin_pref');
+        }else{
+            return Redirect('admin_login');
+
+        }
+    }
+
+
+    function postUpdateLeaveLimit(){
+        if($this->checkAdmin()){
+
+            $id = Input::get('id');
+            $lmt = Input::get('lval');
+
+            if($id !=null){
+                DB::table('leavetype')->where('id',$id)->update(['limit'=>$lmt]);
+            }
+            return Redirect('admin_pref');
+
+            }else{
+            return Redirect('admin_login');
+
+        }
+
+
+        }
+
+
+
+
+
+    // functions
     function getDeleteLeaveApplication()
     {
         $appId = Input::get('id');
@@ -622,6 +662,12 @@ class AdminController extends Controller
 
         }
 
+    }
+    function deleteLeaveType($id){
+        if($this->checkAdmin()){
+            DB::table('leavetype')->where('id', $id)->delete();
+
+        }
     }
 
 

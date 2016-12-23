@@ -36,6 +36,8 @@
                     <th>Leave Name</th>
                     <th>Current Leave Limit</th>
                     <th>Action</th>
+                    <th>Delete</th>
+
 
                 </tr>
                 </thead>
@@ -43,13 +45,18 @@
                 @foreach($leaveTypeDb as $leaveItem)
 
 
+
                     <tr class="active">
                         <td>{{$leaveItem->lid}}</td>
                         <td>{{$leaveItem->name}}</td>
                         <td>{{$leaveItem->limit}}</td>
-                        <td> <input type="text" name="lval" class="form-control" value=""/>
-                         <a href="{{url('/emp_detail?id=')}}" type="button" class="btn btn-info">Update limit</a></td>
+                        <td><form method="post" action="{{url('/updt_pref')}}"> <input type="text" name="lval" class="form-control" value=""/>
+                                <input type="hidden" name="id" class="form-control" value="{{$leaveItem->id}}"/>
+                                <input type="hidden" value="{{ csrf_token()  }}" name="_token">
 
+                                <button  type="submit" class="btn btn-info">Update limit</button></form></td>
+
+                        <td><a href="{{url('/del_pref?id='.$leaveItem->id)}}" type="button" class="btn btn-danger">Delete Leave type</a></td>
                     </tr>
                 @endforeach
 

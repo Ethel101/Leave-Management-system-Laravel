@@ -47,6 +47,8 @@ Route::get('/del_leave', 'AdminController@getDeleteLeaveApplication');
 
 Route::get('/admin_pref', 'AdminController@getPref');
 Route::post('/add_ltype', 'AdminController@postAddLtype');
+Route::get('/del_pref', 'AdminController@getDeleteLType');
+Route::post('/updt_pref', 'AdminController@postUpdateLeaveLimit');
 
 
 

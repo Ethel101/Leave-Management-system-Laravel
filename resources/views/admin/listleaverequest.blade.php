@@ -23,7 +23,7 @@
                                 <div class="panel-body panel-body-table">
 
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-striped table-actions">
+                                        <table class="table datatable table-bordered table-striped table-actions">
                                             <thead>
                                                 <tr>
                                                     <th width="50">id</th>

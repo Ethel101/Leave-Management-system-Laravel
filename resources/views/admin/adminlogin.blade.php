@@ -36,7 +36,7 @@
                                             <input type="hidden" value="{{ csrf_token()  }}" name="_token">
 
                         <div class="col-md-6">
-                            <a href="#" class="btn btn-link btn-block">Forgot your password?</a>
+                            <a href="{{url('user_login')}}" class="btn btn-link btn-block">Login as an Employee?</a>
                         </div>
                         <div class="col-md-6">
                             <button type="submit" class="btn btn-info btn-block">Log In</button>

@@ -11,7 +11,7 @@
         <!-- END META SECTION -->
 
         <!-- CSS INCLUDE -->
-        <link rel="stylesheet" type="text/css" id="theme" href="css/theme-dark-head-light.css"/>
+        <link rel="stylesheet" type="text/css" id="theme" href="css/theme-dark.css"/>
         <!-- EOF CSS INCLUDE -->
     </head>
     <body>
@@ -45,7 +45,7 @@
                     </li>
                     <li class="xn-title">Navigation</li>
                     <li class="active">
-                        <a href="{{url('/user_dash')}}"><span class="fa fa-desktop"></span> <span class="xn-text">Dashboard</span></a>
+                        <a href="{{url('/user_dash')}}"><span class="fa fa-desktop"></span> <span class="xn-text">My Leave Applications</span></a>
                     </li>
                     <li class="active">
                         <a href="{{url('/profile')}}"><span class="fa fa-desktop"></span> <span class="xn-text">My Profile</span></a>
@@ -98,7 +98,6 @@
 
 
 @yield('content')
-
 
 
 

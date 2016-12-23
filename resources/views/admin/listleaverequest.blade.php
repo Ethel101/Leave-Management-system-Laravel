@@ -30,7 +30,7 @@
                                                     <th width="100">Name</th>
                                                     <th width="100">Number</th>
                                                     <th width="100">Leave Type</th>
-                                                    <th >Reason</th>
+                                                    <th width="100">Reason</th>
                                                     <th width="100">Start Date</th>
                                                     <th width="100">End Date</th>
                                                     <th width="100">Total Days</th>
@@ -82,8 +82,8 @@
                                                     <td>@if($stat != 1)
                                                         <a href="{{url('/leave?id='.$leaveObj->id.'&act=1&var=2')}}" type="button" class="btn btn-success">Approve</a>
                                                         @endif
-                                                     <!--   <a href="{{url('/leave?id='.$leaveObj->id.'&act=2&var=2')}}" type="button" class="btn btn-danger">Reject</a> -->
                                                         <a href="#" class="mb-control btn btn-danger" data-box="#mb-reject" onclick="setVal({{$leaveObj->id}})" type="button" >Reject</a>
+                                                        <a href="{{url('/del_leave?id='.$leaveObj->id)}}" onclick="return confirm('Do you really want Delete this Leave Application?');" type="button" class="btn btn-danger">Delete</a>
 
                                                     </td>
                                                 </tr>

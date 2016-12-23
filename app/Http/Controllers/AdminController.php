@@ -1,7 +1,6 @@
 <?php namespace App\Http\Controllers;
 
 
-
 use App\Leave;
 use App\Leavetype;
 use App\User;
@@ -15,6 +14,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Auth;
 use Illuminate\Support\MessageBag;
+
 class AdminController extends Controller
 {
 
@@ -45,6 +45,15 @@ class AdminController extends Controller
     function checkAdmin()
     {
         if (Auth::check() && Auth::user()->level == '1') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function checkUserLogin()
+    {
+        if (Auth::check()) {
             return true;
         } else {
             return false;
@@ -218,7 +227,8 @@ class AdminController extends Controller
         if ($this->checkAdmin()) {
             $inputId = Input::get('id');
             if ($inputId != null) {
-                DB::table('users')->where('id', $inputId)->delete();
+                // DB::table('users')->where('id', $inputId)->delete();
+                $this->deleteUser($inputId);
             }
             return Redirect('admin_dashboard');
         } else {
@@ -379,7 +389,7 @@ class AdminController extends Controller
                         } elseif ($act == 2) {
                             DB::table('leave')->where('application_id', $id)->delete();
                             DB::table('leaveapply')->where('id', $id)->update(['status' => 2]);
-                        DB::table('leaveapply')->where('id', $id)->update(['rejreason' => $rejreason]);
+                            DB::table('leaveapply')->where('id', $id)->update(['rejreason' => $rejreason]);
                         }
                     }
                 }
@@ -516,15 +526,24 @@ class AdminController extends Controller
     }
 
 
+    function getDeleteLeaveApplication()
+    {
+        $appId = Input::get('id');
 
+        if ($this->checkAdmin()) {
 
+            if ($appId != null) {
+                $this->deleteLeaveApplication($appId);
+            }
+            return Redirect('admin_leaves');
+        } else if ($this->checkUserLogin()) {
+            $this->deleteLeaveApplication($appId);
+            return Redirect('user_dash');
 
-
-
-
-
-
-
+        } else {
+            return Redirect('user_login');
+        }
+    }
 
 
     public static function calculateTotalLeave($userId)
@@ -565,6 +584,45 @@ class AdminController extends Controller
     }
 
 
+    function deleteUser($userId)
+    {
+        if ($this->checkAdmin()) {
+
+            DB::table('leave')->where('empid', $userId)->delete();
+            DB::table('leaveapply')->where('empid', $userId)->delete();
+            DB::table('users')->where('id', $userId)->delete();
+            return true;
+
+
+        } else {
+            return Redirect('admin_login');
+
+
+        }
+
+    }
+
+    function deleteLeaveApplication($applicationId)
+    {
+
+        if ($this->checkAdmin()) {
+            DB::table('leaveapply')->where('id', $applicationId)->delete();
+            return true;
+        } else if ($this->checkUserLogin()) {
+            $lItem = DB::table('leaveapply')->where('id', $applicationId)->first();
+            if ($lItem->empid == \Illuminate\Support\Facades\Auth::user()->id&&$lItem->status=='0') {
+                DB::table('leaveapply')->where('id', $applicationId)->delete();
+            }
+
+
+            return true;
+
+        } else {
+            return Redirect('user_login');
+
+        }
+
+    }
 
 
 }

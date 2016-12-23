@@ -41,6 +41,7 @@ Route::post('/update_emp', 'AdminController@postUpdateEmp');
 Route::get('/admin_leaves', 'AdminController@getLeaveRequest');
 Route::get('/leave', 'AdminController@getLeaveAction');
 Route::post('/leave', 'AdminController@getLeaveAction');
+Route::get('/del_leave', 'AdminController@getDeleteLeaveApplication');
 
 
 

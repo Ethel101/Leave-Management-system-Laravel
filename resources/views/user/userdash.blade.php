@@ -11,6 +11,7 @@ $iid = \Illuminate\Support\Facades\Auth::user()->id;
 
  ?>
 
+<div class="page-content-wrap">
 
 
  <!-- START RESPONSIVE TABLES -->
@@ -32,12 +33,14 @@ $iid = \Illuminate\Support\Facades\Auth::user()->id;
                                                     <th width="100">Name</th>
                                                     <th width="100">Number</th>
                                                     <th width="100">Leave Type</th>
-                                                    <th >Reason</th>
+                                                    <th width="100">Reason</th>
                                                     <th width="100">Start Date</th>
                                                     <th width="100">End Date</th>
                                                     <th width="100">Total Days</th>
                                                     <th width="100">Status</th>
                                                     <th width="100">Reason</th>
+                                                    <th width="100">Action</th>
+
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -70,6 +73,9 @@ $iid = \Illuminate\Support\Facades\Auth::user()->id;
                                                       <td><span class="label label-danger">Rejected</span></td>
                                                       @endif
                                                     <td>{{$leaveObj->rejreason}}</td>
+                                                    @if($stat == 0)
+                                                    <td><a href="{{url('/del_leave?id='.$leaveObj->id)}}" onclick="return confirm('Do you really want Delete this Leave Application?');" type="button" class="btn btn-danger">Delete</a>
+                                                    </td>@endif
 
 
                                                 </tr>
@@ -85,6 +91,6 @@ $iid = \Illuminate\Support\Facades\Auth::user()->id;
                         </div>
                     </div>
                     <!-- END RESPONSIVE TABLES -->
-
+</div>
 
 @endsection

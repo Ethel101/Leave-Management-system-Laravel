@@ -670,5 +670,10 @@ class AdminController extends Controller
         }
     }
 
+    public static function getLeaveTypeName($id){
+
+        return DB::table('leavetype')->where('lid',$id)->first()->name;
+    }
+
 
 }

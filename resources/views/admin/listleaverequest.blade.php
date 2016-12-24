@@ -61,7 +61,7 @@
                                                     <td class="text-center">1</td>
                                                     <td><strong><a href="{{url('/emp_detail?id='.$leaveObj->empid)}}"> {{$leaveObj->name}}</a></strong></td>
                                                      <td>{{$leaveObj->number}}</td>
-                                                      <td>{{$leaveObj->leave_type}}</td>
+                                                      <td>{{\App\Http\Controllers\AdminController::getLeaveTypeName($leaveObj->leave_type)}}</td>
                                                       <td>{{$leaveObj->reason}}</td>
                                                       <td>{{$leaveObj->start_date}}</td>
                                                       <td>{{$leaveObj->end_date}}</td>

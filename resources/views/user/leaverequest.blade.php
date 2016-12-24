@@ -22,8 +22,7 @@
                                 <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
                             </ul>
                         </div>
-                        <div class="panel-body">
-                        </div>
+
                         <div class="panel-body">
 
                             @if(isset($success))
@@ -70,7 +69,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label">Leave Type</label>
                                         <div class="col-md-9">
-                                            <select name="leave_type" class="form-control select">
+                                            <select name="leave_type" class="form-control">
                                                 @foreach($lTypeDb as $leaveItem)
                                                 <option value="{{$leaveItem->lid}}">{{$leaveItem->name}}</option>
                                                     @endforeach
@@ -121,13 +120,6 @@
                                         </div>
                                     </div>
 
-                                    <!--    <div class="form-group">
-                                           <label class="col-md-3 control-label">Image</label>
-                                           <div class="col-md-9">
-                                               <input type="file" class="fileinput btn-primary" name="proimg" id="proimg" title="Browse file"/>
-                                               <span class="help-block">Image of employee</span>
-                                           </div>
-                                       </div> -->
 
                                 </div>
                                 <div class="col-md-6">
@@ -171,6 +163,7 @@
                             </div>
 
                         </div>
+                        <!-- panel body end -->
                         <div class="panel-footer">
                             <button class="btn btn-default">Clear Form</button>
                             <button class="btn btn-primary pull-right">Apply Leave</button>
@@ -182,7 +175,7 @@
         </div>
 
     </div>
-    <!-- END PAGE CONTENT WRAPPER -->
+
 
 
 
